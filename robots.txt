@@ -1,0 +1,5 @@
+User-agent: *
+Disallow: /folder/
+Disallow: /index.php/Admin\
+Sitemap: http://https://djaman.42web.io/sitemap.xml
+
