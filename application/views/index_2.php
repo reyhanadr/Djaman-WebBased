@@ -1,36 +1,68 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-Q9VKM4TDMZ"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-Q9VKM4TDMZ');
+    </script>
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta name="description" content="Responsive Bootstrap4 Shop Template, Created by Imran Hossain from https://imransdesign.com/">
+	<meta property="og:site_name" content="Djaman Brand">
+	<meta property="og:title" content="Djaman - Jamu Organik">
+	<meta property="og:type" content="shop" />
+    <meta property="og:description" content="Djaman menjual jamu berupa resep rahasia atau warisan nenek moyang.">
+    <meta property="og:url" content="https://djaman.42web.io">
+    <meta property="og:image" content="https:/djaman.42web.io/assets_client/img/Logo_Djaman.png">
+	<meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https:/djaman.42web.io/assets_client/img/Logo_Djaman.png">
+
+	<meta name="keywords" content="Djaman, jamu, resep rahasia, warisan nenek moyang, pengalaman, pengetahuan, pembuatan jamu, warisan budaya, identitas bangsa, kesehatan tubuh, alami, tradisional,  body health, natural, herbal drink crafting, alternative medicine, vegan friendly, vegetarian, vegan food">
+    <meta name="description" content="Djaman menjual jamu berupa resep rahasia atau warisan nenek moyang. Produk kami memiliki pengalaman dan pengetahuan dalam pembuatan jamu yang telah diwariskan dari nenek moyang dan dijaga dengan baik. Rasakan manfaat dari warisan budaya ini dengan menggunakan produk Djaman dan jaga kesehatan tubuh dengan cara alami dan tradisional.">
 
 	<!-- title -->
 	<title>Djaman - Jamu Organik</title>
+	
+    <script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "Organization",
+        "name": "Djaman",
+        "url": "/",
+        "logo": "https://djaman.42web.io//assets_client/img/Logo_Djaman.png",
+    }
+    </script>
+
 
 	<!-- favicon -->
-	<link rel="shortcut icon" type="image/png" href="assets/img/Logo_Djaman.webp">
+	<link rel="shortcut icon" type="image/png" href="<?= base_url()?>assets_client/img/Logo_Djaman.webp">
 	<!-- google font -->
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Poppins:400,700&display=swap" rel="stylesheet">
 	<!-- fontawesome -->
-	<link rel="stylesheet" href="assets/css/all.min.css">
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/fontawesome.min.css" integrity="sha512-SgaqKKxJDQ/tAUAAXzvxZz33rmn7leYDYfBP+YoMRSENhf3zJyx3SBASt/OfeQwBHA1nxMis7mM3EV/oYT6Fdw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 	<!-- bootstrap -->
-	<link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" href="<?= base_url()?>assets_client/bootstrap/css/bootstrap.min.css">
 	<!-- owl carousel -->
-	<link rel="stylesheet" href="assets/css/owl.carousel.css">
+	<link rel="stylesheet" href="<?= base_url()?>assets_client/css/owl.carousel.css">
 	<!-- magnific popup -->
-	<link rel="stylesheet" href="assets/css/magnific-popup.css">
+	<link rel="stylesheet" href="<?= base_url()?>assets_client/css/magnific-popup.css">
 	<!-- animate css -->
-	<link rel="stylesheet" href="assets/css/animate.css">
+	<link rel="stylesheet" href="<?= base_url()?>assets_client/css/animate.css">
 	<!-- mean menu css -->
-	<link rel="stylesheet" href="assets/css/meanmenu.min.css">
+	<link rel="stylesheet" href="<?= base_url()?>assets_client/css/meanmenu.min.css">
 	<!-- main style -->
-	<link rel="stylesheet" href="assets/css/main.css">
+	<link rel="stylesheet" href="<?= base_url()?>assets_client/css/main.css">
 	<!-- responsive -->
-	<link rel="stylesheet" href="assets/css/responsive.css">
+	<link rel="stylesheet" href="<?= base_url()?>assets_client/css/responsive.css">
+    <!-- reCaptcha Enterprise Google -->
+    <script  src="https://www.google.com/recaptcha/enterprise.js?render=6Lf8M04nAAAAAMpRiYuWw87cLuk1LV1Zl5H4oqFM"></script>
 
 </head>
 <body>
@@ -51,8 +83,8 @@
 					<div class="main-menu-wrap">
 						<!-- logo -->
 						<div class="site-logo">
-							<a href="index.html">
-								<img src="assets/img/Logo_Djaman.webp" alt="">
+							<a href="<?= base_url()?>">
+								<img src="<?= base_url()?>/assets_client/img/Logo_Djaman.png" alt="">
 							</a>
 						</div>
 						<!-- logo -->
@@ -60,47 +92,18 @@
 						<!-- menu start -->
 						<nav class="main-menu">
 							<ul>
-								<li class="current-list-item"><a href="index_2.html">Home</a>
-									<!-- <ul class="sub-menu">
-										<li><a href="index.html">Static Home</a></li>
-										<li><a href="index_2.html">Slider Home</a></li>
-									</ul> -->
+								<li class="current-list-item"><a href="<?= base_url()?>">Home</a>
 								</li>
-								<li><a href="about.html">Tentang Kami</a></li>
-								<!-- <li><a href="#">Pages</a>
-									<ul class="sub-menu">
-										<li><a href="404.html">404 page</a></li>
-										<li><a href="about.html">About</a></li>
-										<li><a href="cart.html">Cart</a></li>
-										<li><a href="checkout.html">Check Out</a></li>
-										<li><a href="contact.html">Contact</a></li>
-										<li><a href="news.html">News</a></li>
-										<li><a href="shop.html">Shop</a></li>
-									</ul>
-								</li> -->
-								<!-- <li><a href="news.html">News</a>
-									<ul class="sub-menu">
-										<li><a href="news.html">News</a></li>
-										<li><a href="single-news.html">Single News</a></li>
-									</ul>
-								</li> -->
-								<li><a href="contact.html">Kontak Kami</a></li>
-								<li><a href="shop.html">Belanja</a>
-								<li><a href="https://cekresi.com/">Lacak Pengiriman</a>
-									<!-- <ul class="sub-menu">
-										<li><a href="shop.html">Shop</a></li>
-										<li><a href="checkout.html">Check Out</a></li>
-										<li><a href="single-product.html">Single Product</a></li>
-										<li><a href="cart.html">Cart</a></li>
-									</ul> -->
+								<li><a href="<?= base_url()?>index.php/Home/TentangKami">Tentang Kami</a></li>
+								<li><a href="<?= base_url()?>index.php/Home/KontakKami">Kontak Kami</a></li>
+								<li><a href="<?= base_url()?>index.php/Home/Belanja">Belanja</a>
+								<li><a href="https://cekresi.com/" target="_blank">Lacak Pengiriman</a>
 								</li>
 								<li>
 									<div class="header-icons">
-										<!-- <a class="shopping-cart" href="cart.html"><i class="fas fa-shopping-cart"></i></a> -->
 										<a class="mobile-hide search-bar-icon" href="#"><i class="fas fa-search"></i></a>
 									</div>
 								</li>
-								
 							</ul>
 						</nav>
 						<a class="mobile-show search-bar-icon" href="#"><i class="fas fa-search"></i></a>
@@ -122,8 +125,10 @@
 					<div class="search-bar">
 						<div class="search-bar-tablecell">
 							<h3>Search For:</h3>
-							<input type="text" placeholder="Keywords">
-							<button type="submit">Search <i class="fas fa-search"></i></button>
+							<form action="<?= site_url('Home/search') ?>" method="GET">
+							<input type="text" name="keyword" placeholder="Keywords">
+								<button type="submit">Search <i class="fas fa-search"></i></button>
+							</form>
 						</div>
 					</div>
 				</div>
@@ -144,8 +149,8 @@
 								<p class="subtitle">Fresh & Organik</p>
 								<h1>Jamu Berkhasiat dan Sensasional</h1>
 								<div class="hero-btns">
-									<a href="shop.html" class="boxed-btn">Lihat Koleksi Jamu</a>
-									<a href="contact.html" class="bordered-btn">Kontak Kami</a>
+									<a href="<?= base_url()?>index.php/Home/Belanja" class="boxed-btn">Lihat Koleksi Jamu</a>
+									<a href="<?= base_url()?>index.php/Home/KontakKami" class="bordered-btn">Kontak Kami</a>
 								</div>
 							</div>
 						</div>
@@ -163,8 +168,8 @@
 								<p class="subtitle">Fresh Everyday</p>
 								<h1>100% Berbahan Organik</h1>
 								<div class="hero-btns">
-									<a href="shop.html" class="boxed-btn">Kunjungi Belanja</a>
-									<a href="contact.html" class="bordered-btn">Kontak Kami</a>
+									<a href="<?= base_url()?>index.php/Home/Belanja" class="boxed-btn">Kunjungi Belanja</a>
+									<a href="<?= base_url()?>index.php/Home/TentangKami" class="bordered-btn">Tentang Kami</a>
 								</div>
 							</div>
 						</div>
@@ -182,8 +187,8 @@
 								<p class="subtitle">Terdapat Diskon Murah!</p>
 								<h1>Dapatkan Diskon</h1>
 								<div class="hero-btns">
-									<a href="shop.html" class="boxed-btn">Kunjungi Belanja</a>
-									<a href="contact.html" class="bordered-btn">Kontak Kami</a>
+									<a href="<?= base_url()?>index.php/Home/KontakKami" class="boxed-btn">Kunjungi Belanja</a>
+									<a href="<?= base_url()?>index.php/Home/KontakKami" class="bordered-btn">Kontak Kami</a>
 								</div>
 							</div>
 						</div>
@@ -251,43 +256,45 @@
 			</div>
 
 			<div class="row">
+			<?php foreach ($data_produk_random as $produk) : ?>
 				<div class="col-lg-4 col-md-6 text-center">
 					<div class="single-product-item">
 						<div class="product-image">
-							<a href="single-product.html"><img src="assets/img/products/product-img-1.webp" alt=""></a>
+							<a href="index.php/Home/SingleProduk/<?php echo $produk->id_produk; ?>"><img src="<?= base_url()?>/assets/img/produk/<?php echo $produk->foto; ?>" alt=""></a>
 						</div>
-						<h3>Beras Kencur</h3>
-						<p class="product-price"><span>Per Pcs</span> Rp.10.000 </p>
-						<a href="single-product.html" class="cart-btn"> Lihat Detail</a>
+						<h3><?php echo $produk->nama_jamu; ?></h3>
+						<?php if ($is_diskon_harga == $produk->id_produk ) : ?>
+								<p class="product-price">
+									<span class="subtitle-product-price">Per <?php echo $produk->satuan; ?></span>
+									<del><?php echo $produk_terlaris->harga_asli; ?></del>
+									<span class="product-price-shop"> <?php echo $produk_terlaris->harga_diskon; ?></span>
+								</p>
+
+							<?php else : ?>
+								<p class="product-price">
+									<span class="subtitle-product-price"><?php echo $produk->satuan; ?></span>
+									<?php echo $produk->harga; ?>
+								</p>
+						<?php endif; ?>
+						<a href="index.php/Home/SingleProduk/<?php echo $produk->id_produk; ?>" class="cart-btn"> Lihat Detail</a>
 					</div>
 				</div>
-				<div class="col-lg-4 col-md-6 text-center">
-					<div class="single-product-item">
-						<div class="product-image">
-							<a href="single-product.html"><img src="assets/img/products/product-img-1.webp" alt=""></a>
+			<?php endforeach; ?>
+
+			</div>
+			<div class="row mt-80">
+					<div class="col-lg-10 offset-lg-1 text-center">
+						<div class="showbutton">
+							<a href="<?= base_url()?>index.php/Home/Belanja" class="show-all"> Lihat Semua Produk</a>
 						</div>
-						<h3>Beras Kencur</h3>
-						<p class="product-price"><span>Per Pcs</span> Rp.10.000 </p>
-						<a href="single-product.html" class="cart-btn"> Lihat Detail</a>
 					</div>
-				</div>
-				<div class="col-lg-4 col-md-6 offset-md-3 offset-lg-0 text-center">
-					<div class="single-product-item">
-						<div class="product-image">
-							<a href="single-product.html"><img src="assets/img/products/product-img-1.webp" alt=""></a>
-						</div>
-						<h3>Beras Kencur</h3>
-						<p class="product-price"><span>Per Pcs</span> Rp.10.000 </p>
-						<a href="single-product.html" class="cart-btn"> Lihat Detail</a>
-					</div>
-				</div>
 			</div>
 		</div>
 	</div>
 	<!-- end product section -->
 
 	<!-- cart banner section -->
-	<section class="cart-banner pt-100 pb-100">
+	<section id="Terlaris" class="cart-banner pt-100 pb-100">
     	<div class="container">
         	<div class="row clearfix">
             	<!--Image Column-->
@@ -296,21 +303,33 @@
                     	<div class="price-box">
                         	<div class="inner-price">
                                 <span class="price">
-                                    <strong>30%</strong> <br> off per Pcs
+                                    <strong><?php echo $produk_terlaris->diskon; ?>%</strong> <br> off per Pcs
                                 </span>
                             </div>
                         </div>
-                    	<img src="assets/img/products/product-img-1.webp" alt="">
+                    	<img src="<?= base_url()?>/assets/img/produk/<?php echo $produk_terlaris->foto; ?>" alt="">
                     </div>
                 </div>
                 <!--Content Column-->
                 <div class="content-column col-lg-6">
 					<h3><span class="orange-text">Terlaris</span> Bulan Ini</h3>
-                    <h4>Beras Kencur</h4>
+                    <h4><?php echo $produk_terlaris->nama_jamu; ?></h4>
+					<span class="diskon-price" style="text-decoration: line-through;"><?php echo $produk_terlaris->harga_asli; ?> </span>
+					<span class="product-price" ><?php echo $produk_terlaris->harga_diskon; ?> </span> 
+
+					<!-- <div class="row">
+						<div class="col">
+							<p class="product-price" style="text-decoration: line-through;"><?php echo $produk_terlaris->harga_asli; ?> </p>
+						</div>
+						<div class="col">
+							<p class="diskon-price" ><?php echo $produk_terlaris->harga_diskon; ?> </p> 
+
+						</div>
+					</div> -->
                     <div class="text">Dapatkan kesempatan emas untuk berbelanja dengan diskon besar-besaran! Hemat uang anda dengan diskon menarik yang kami tawarkan. Belanja Sekarang!</div>
                     <!--Countdown Timer-->
-                    <div class="time-counter"><div class="time-countdown clearfix" data-countdown="2023/8/15"><div class="counter-column"><div class="inner"><span class="count">00</span>Days</div></div> <div class="counter-column"><div class="inner"><span class="count">00</span>Hours</div></div>  <div class="counter-column"><div class="inner"><span class="count">00</span>Mins</div></div>  <div class="counter-column"><div class="inner"><span class="count">00</span>Secs</div></div></div></div>
-                	<a href="cart.html" class="cart-btn mt-3"> Lihat Detail</a>
+                    <div class="time-counter"><div class="time-countdown clearfix" data-countdown="<?php echo $produk_terlaris->date; ?>"><div class="counter-column"><div class="inner"><span class="count">00</span>Days</div></div> <div class="counter-column"><div class="inner"><span class="count">00</span>Hours</div></div>  <div class="counter-column"><div class="inner"><span class="count">00</span>Mins</div></div>  <div class="counter-column"><div class="inner"><span class="count">00</span>Secs</div></div></div></div>
+                	<a href="<?= base_url()?>index.php/Home/SingleProduk/<?php echo $produk_terlaris->id_produk; ?>" class="cart-btn mt-3"> Lihat Detail</a>
                 </div>
             </div>
         </div>
@@ -399,7 +418,7 @@
 							dijaga dengan baik ini dan menjaga kesehatan tubuh dengan 
 							cara yang alami dan tradisional.
 						</p>
-						<a href="about.html" class="boxed-btn mt-4">Ketahui Tentang Kami</a>
+						<a href="<?= base_url()?>index.php/Home/TentangKami" class="boxed-btn mt-4">Ketahui Tentang Kami</a>
 					</div>
 				</div>
 				<div class="col-lg-6 col-md-12">
@@ -415,9 +434,9 @@
 	<!-- shop banner -->
 	<section class="shop-banner">
     	<div class="container">
-        	<h3>December sale is on! <br> with big <span class="orange-text">Discount...</span></h3>
-            <div class="sale-percent"><span>Sale! <br> Upto</span>50% <span>off</span></div>
-            <a href="shop.html" class="cart-btn btn-lg">Shop Now</a>
+        	<h3>Product sale is on! <br> with big <span class="orange-text">Discount...</span></h3>
+            <div class="sale-percent"><span>Discount! <br> Upto</span><?php echo $produk_terlaris->diskon; ?>% <span>off</span></div>
+            <a href="<?= base_url()?>index.php/Home/Belanja" class="cart-btn btn-lg">Belanja Sekarang</a>
         </div>
     </section>
 	<!-- end shop banner -->
@@ -515,106 +534,35 @@
 		</div>
 	</div> -->
 	<!-- end logo carousel -->
-
-	<!-- footer -->
-	<div class="footer-area">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-3 col-md-6">
-					<div class="footer-box about-widget">
-						<h2 class="widget-title">Djaman Brand</h2>
-						<p>Djaman menjual jamu berupa resep
-							rahasia atau warisan nenek
-							moyang. Hal ini karena Djaman
-							memiliki pengalaman dan
-							pengetahuan dalam pembuatan
-							jamu yang telah diwariskan dari
-							nenek moyang dan dijaga dengan
-							baik hingga saat ini.</p>
-					</div>
-				</div>
-				<div class="col-lg-3 col-md-6">
-					<div class="footer-box get-in-touch">
-						<h2 class="widget-title">Get in Touch</h2>
-						<ul>
-							<li>Gang M. Ardjo No. 224, Kota Cimahi</li>
-							<li>support@Djaman.my.id</li>
-							<li>+62 858 7263 2736</li>
-						</ul>
-					</div>
-				</div>
-				<div class="col-lg-3 col-md-6">
-					<div class="footer-box pages">
-						<h2 class="widget-title">Pages</h2>
-						<ul>
-							<li><a href="index.html">Home</a></li>
-							<li><a href="about.html">Tentang Kami</a></li>
-							<li><a href="contact.html">Kontak Kami</a></li>
-							<li><a href="shop.html">Belanja</a></li>
-							<!-- <li><a href="news.html">News</a></li> -->
-						</ul>
-					</div>
-				</div>
-				<div class="col-lg-3 col-md-6">
-					<div class="footer-box subscribe">
-						<h2 class="widget-title">Berlangganan</h2>
-						<p>Berlangganan Email untuk mendapatkan info terbaru tentang Djaman!</p>
-						<form action="index.html">
-							<input type="email" placeholder="Email">
-							<button type="submit"><i class="fas fa-paper-plane"></i></button>
-						</form>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- end footer -->
-	
-	<!-- copyright -->
-	<div class="copyright">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-6 col-md-12">
-					<p>Copyrights &copy; 2023 - <a href="https://reyhanadr.epizy.com/">Reyhan Adriana Deris</a>,  All Rights Reserved.<br>
-						Distributed By - <a href="https://Djaman.my.id/">Djaman Brand.</a>
-					</p>
-				</div>
-				<div class="col-lg-6 text-right col-md-12">
-					<div class="social-icons">
-						<ul>
-							<li><a href="#" target="_blank"><i class="fab fa-facebook-f"></i></a></li>
-							<li><a href="#" target="_blank"><i class="fab fa-twitter"></i></a></li>
-							<li><a href="#" target="_blank"><i class="fab fa-instagram"></i></a></li>
-							<!-- <li><a href="#" target="_blank"><i class="fab fa-linkedin"></i></a></li>
-							<li><a href="#" target="_blank"><i class="fab fa-dribbble"></i></a></li> -->
-						</ul>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- end copyright -->
 	
 	<!-- jquery -->
-	<script src="assets/js/jquery-1.11.3.min.js"></script>
+	<script src="<?= base_url()?>/assets_client/js/jquery-1.11.3.min.js"></script>
 	<!-- bootstrap -->
-	<script src="assets/bootstrap/js/bootstrap.min.js"></script>
+	<script src="<?= base_url()?>/assets_client/bootstrap/js/bootstrap.min.js"></script>
 	<!-- count down -->
-	<script src="assets/js/jquery.countdown.js"></script>
+	<script src="<?= base_url()?>/assets_client/js/jquery.countdown.js"></script>
 	<!-- isotope -->
-	<script src="assets/js/jquery.isotope-3.0.6.min.js"></script>
+	<script src="<?= base_url()?>/assets_client/js/jquery.isotope-3.0.6.min.js"></script>
 	<!-- waypoints -->
-	<script src="assets/js/waypoints.js"></script>
+	<script src="<?= base_url()?>/assets_client/js/waypoints.js"></script>
 	<!-- owl carousel -->
-	<script src="assets/js/owl.carousel.min.js"></script>
+	<script src="<?= base_url()?>/assets_client/js/owl.carousel.min.js"></script>
 	<!-- magnific popup -->
-	<script src="assets/js/jquery.magnific-popup.min.js"></script>
+	<script src="<?= base_url()?>/assets_client/js/jquery.magnific-popup.min.js"></script>
 	<!-- mean menu -->
-	<script src="assets/js/jquery.meanmenu.min.js"></script>
+	<script src="<?= base_url()?>/assets_client/js/jquery.meanmenu.min.js"></script>
 	<!-- sticker js -->
-	<script src="assets/js/sticker.js"></script>
+	<script src="<?= base_url()?>/assets_client/js/sticker.js"></script>
 	<!-- main js -->
-	<script src="assets/js/main.js"></script>
-
+	<script src="<?= base_url()?>/assets_client/js/main.js"></script>
+    <script>
+        grecaptcha.enterprise.ready(async () => {
+            const token = await grecaptcha.enterprise.execute('6Lf8M04nAAAAAMpRiYuWw87cLuk1LV1Zl5H4oqFM', {action: 'homepage'});
+            // IMPORTANT: The 'token' that results from execute is an encrypted response sent by
+            // reCAPTCHA Enterprise to the end user's browser.
+            // This token must be validated by creating an assessment.
+            // See https://cloud.google.com/recaptcha-enterprise/docs/create-assessment
+        });
+    </script>
 </body>
 </html>
