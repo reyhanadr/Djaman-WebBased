@@ -1,35 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-Q9VKM4TDMZ"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-
-        gtag('config', 'G-Q9VKM4TDMZ');
-    </script>
-    <!-- google font -->
-	<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet">
-	<link href="https://fonts.googleapis.com/css?family=Poppins:400,700&display=swap" rel="stylesheet">
-	<!-- fontawesome -->
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/fontawesome.min.css" integrity="sha512-SgaqKKxJDQ/tAUAAXzvxZz33rmn7leYDYfBP+YoMRSENhf3zJyx3SBASt/OfeQwBHA1nxMis7mM3EV/oYT6Fdw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-	<!-- bootstrap -->
-	<link rel="stylesheet" href="<?= base_url()?>assets_client/bootstrap/css/bootstrap.min.css">
-	<!-- owl carousel -->
-	<link rel="stylesheet" href="<?= base_url()?>assets_client/css/owl.carousel.css">
-	<!-- magnific popup -->
-	<link rel="stylesheet" href="<?= base_url()?>assets_client/css/magnific-popup.css">
-	<!-- animate css -->
-	<link rel="stylesheet" href="<?= base_url()?>assets_client/css/animate.css">
-	<!-- mean menu css -->
-	<link rel="stylesheet" href="<?= base_url()?>assets_client/css/meanmenu.min.css">
-	<!-- main style -->
-	<link rel="stylesheet" href="<?= base_url()?>assets_client/css/main.css">
-	<!-- responsive -->
-	<link rel="stylesheet" href="<?= base_url()?>assets_client/css/responsive.css">
+    <!-- reCaptcha Enterprise Google -->
+    <script src="https://www.google.com/recaptcha/enterprise.js?render=6Lf8M04nAAAAAMpRiYuWw87cLuk1LV1Zl5H4oqFM"></script>
 </head>
 <body>
     <!-- footer -->
@@ -116,7 +89,15 @@
 		</div>
 	</div>
 	<!-- end copyright -->
-
+		<script>
+            grecaptcha.enterprise.ready(async () => {
+                const token = await grecaptcha.enterprise.execute('6Lf8M04nAAAAAMpRiYuWw87cLuk1LV1Zl5H4oqFM', {action: 'homepage'});
+                // IMPORTANT: The 'token' that results from execute is an encrypted response sent by
+                // reCAPTCHA Enterprise to the end user's browser.
+                // This token must be validated by creating an assessment.
+                // See https://cloud.google.com/recaptcha-enterprise/docs/create-assessment
+            });
+        </script>
 </body>
 
 </html>
