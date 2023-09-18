@@ -6,13 +6,13 @@
               <div class="row0">
                 <!-- Basic Bootstrap Table -->
                 <div class="card">
-                  <h5 class="card-header">Data Produk</h5>
-                    <div class="card-body">
+                  <h5 class="card-header">Data Kategori Produk</h5>
+                  <div class="card-body">
                       <div class="row">
                         <div class="col-12 col-md-8 col-lg-4 order-3 order-md-2">
-                          <form action="<?= site_url('produk/search') ?>" method="GET">
+                          <form action="<?= site_url('produk/searchKategori') ?>" method="GET">
                             <div class="input-group">
-                              <input type="text" name="keyword" class="form-control" placeholder="Cari Produk" aria-describedby="button-addon2" value="<?php echo $this->input->get('keyword'); ?>">
+                              <input type="text" name="keyword" class="form-control" placeholder="Cari Kategori" aria-describedby="button-addon2" value="<?php echo $this->input->get('keyword'); ?>">
                               <button class="btn btn-outline-primary" type="submit" id="button-addon2">Cari</button>
                             </div>
                           </form>
@@ -65,54 +65,44 @@
                     );
 
                     $this->table->set_template($template);
-                    $this->table->set_heading('No.', 'Terlaris', 'Foto Produk', 'Nama Produk', 'Satuan', 'Harga', 'Deskripsi', 'Manfaat 1', 'Manfaat 2', 'Manfaat 3', 'Kategori', 'Link Whatsapp Bisnis', 'Aksi');
+                    $this->table->set_heading('No.', 'Nama Kategori', 'Deskripsi Kategori', 'Aksi');
 
-                    foreach ($data_produk as $item) {
+                    foreach ($data_kategori as $item) {
                         $no_tampil = '<strong >' . $no++ . '.</strong>';
-                        $terlaris_btn= '
-                        <a class="dropdown-item" href="' . site_url('Produk/UpdateDataTerlaris/' . htmlentities($item->id_produk)) . '">
-                            <i class="bx bx-star me-1"></i> 
-                        </a>
-                        ';
-                        $id_jamu= '<strong data-id="$item->id_produk">' . htmlentities($item->id_produk) . '</strong>';
-                        $foto_produk = '
-                            <a href="' . site_url('Produk/DetailProduk/' . htmlentities($item->id_produk)) . '">
-                                <img style="max-width: 100%; height: auto; width: 100px;" src="' . base_url() . 'assets/img/produk/' . htmlentities($item->foto) . '" alt="fotoProduk" class="avatar">
-                            </a>';
-                        $dropdown_menu = '
+
+                        $actions_menu = '
+                          <div class="btn-group">
+                              <button type="button" class="btn p-0 " onclick="location.href=\'' . site_url('Produk/editKategoriProduk/' . htmlentities($item->id_kategori)) . '\'">
+                                  <i class="bx bx-edit-alt"></i> Edit
+                              </button>
+                              <button type="button" class="btn p-0 mx-2" onclick="location.href=\'' . site_url('Produk/hapusKategoriProduk/' . htmlentities($item->id_kategori)) . '\'">
+                                  <i class="bx bx-trash"></i> Hapus
+                              </button>
+                          </div>';
+
+                          $dropdown_menu = '
                           <div class="dropdown">
                               <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
                                   <i class="bx bx-dots-vertical-rounded"></i>
                               </button>
                               <div class="dropdown-menu">
-                                <a class="dropdown-item" href="' . site_url('Produk/detailProduk/' . htmlentities($item->id_produk)) . '">
-                                    <i class="bx bx-detail me-1"></i> Detail Produk
-                                </a>
-                                  <a class="dropdown-item" href="' . site_url('Produk/editProduk/' . htmlentities($item->id_produk)) . '">
+
+                                  <a class="dropdown-item" href="' . site_url('Produk/editKategoriProduk/' . htmlentities($item->id_kategori)) . '">
                                       <i class="bx bx-edit-alt me-1"></i> Edit
                                   </a>
-                                  <a class="dropdown-item" href="' . site_url('Produk/hapus/' . htmlentities($item->id_produk)) . '">
+                                  <a class="dropdown-item" href="' . site_url('Produk/hapusKategoriProduk/' . htmlentities($item->id_kategori)) . '">
                                       <i class="bx bx-trash me-1"></i> Hapus
                                   </a>
-                                  <a class="dropdown-item" href="' . site_url('Produk/UpdateDataTerlaris/' . htmlentities($item->id_produk)) . '">
-                                      <i class="bx bx-star me-1"></i> Jadikan Terlaris
-                                  </a>
+
                               </div>
                           </div>';
+                    
+                    
 
                         $this->table->add_row(
                           $no_tampil,
-                          $terlaris_btn,
-                          $foto_produk,
-                          strlen($item->nama_jamu) > 20 ? substr(htmlentities($item->nama_jamu), 0, 20) . '...' : htmlentities($item->nama_jamu),
-                          strlen($item->satuan) > 10 ? substr(htmlentities($item->satuan), 0, 10) . '...' : htmlentities($item->satuan),
-                          htmlentities($item->harga),
-                          strlen($item->deskripsi) > 25 ? substr(htmlentities($item->deskripsi), 0, 50) . '...' : htmlentities($item->deskripsi),
-                          strlen($item->manfaat1) > 30 ? substr(htmlentities($item->manfaat1), 0, 30) . '...' : htmlentities($item->manfaat1),
-                          strlen($item->manfaat2) > 30 ? substr(htmlentities($item->manfaat2), 0, 30) . '...' : htmlentities($item->manfaat2),
-                          strlen($item->manfaat3) > 30 ? substr(htmlentities($item->manfaat3), 0, 30) . '...' : htmlentities($item->manfaat3),
-                          $item->kategori,
-                          strlen($item->link_wa) > 5 ? substr(htmlentities($item->link_wa), 0, 30) . '...' : htmlentities($item->link_wa),
+                          $item->nama_kategori,
+                          $item->deskripsi_kategori,
                           $dropdown_menu
                         );
                     }
@@ -125,8 +115,8 @@
               </div>
               <div class="row">
                 <div class="col-12 col-md-8 col-lg-4 order-3 order-md-2 py-3 mb-4">
-                    <a href="inputProduk">
-                        <button type="button" class="btn btn-primary ">Tambah Produk</button>
+                    <a href="<?= base_url()?>index.php/produk/tambahKategoriProduk">
+                        <button type="button" class="btn btn-primary ">Tambah Kategori</button>
                     </a>
                 </div>
               </div>

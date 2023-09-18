@@ -14,13 +14,25 @@ class Produk extends CI_Controller {
         }
 
     }
+
+    // Terkait Data - Data Produk
     public function tampilDataProduk(){
         $data['active_menu'] = 'data_produk';
         $data['data_produk'] = $this->ProdukModel->getProduk();
         foreach ($data['data_produk'] as &$produk) {
             $produk->harga = 'Rp. ' . number_format($produk->harga, 0, ',', '.');
         }
+        $this->load->view("admin/header", $data);
         $this->load->view("admin/data-produk", $data);
+        $this->load->view("admin/sidebar", $data);
+    }
+    public function detailProduk($id_produk){
+        $data['active_menu'] = 'data_produk';
+        $data['data_produk'] = $this->ProdukModel->getProdukById($id_produk);
+        $data['data_produk']->harga = 'Rp. ' . number_format($data['data_produk']->harga, 0, ',', '.');
+
+        $this->load->view("admin/header", $data);
+        $this->load->view("admin/detail-produk", $data);
         $this->load->view("admin/sidebar", $data);
     }
     
@@ -40,8 +52,12 @@ class Produk extends CI_Controller {
         // Kirim nilai $newProductID ke view menggunakan array data
         $data['newProductID'] = $newProductID;
         $data['active_menu'] = 'data_produk';
+
+        // mengambil data kategori
+        $data['kategori'] = $this->ProdukModel->getKategoriProdukArray();
     
         // Load view form dan kirim data ke view
+        $this->load->view("admin/header", $data);
         $this->load->view('admin/input-produk', $data);
         $this->load->view("admin/sidebar", $data);
     }
@@ -75,7 +91,8 @@ class Produk extends CI_Controller {
        $manfaat1 = $this->input->post('manfaat1');
        $manfaat2 = $this->input->post('manfaat2');
        $manfaat3 = $this->input->post('manfaat3');
-       $kategori = $this->input->post('kategori');
+       $id_kategori = $this->input->post('kategori');
+       
        // Upload foto ke folder
        $config['upload_path'] = 'assets/img/produk';
        $config['allowed_types'] = 'jpg|jpeg|png';
@@ -87,6 +104,7 @@ class Produk extends CI_Controller {
        if (!$this->upload->do_upload('foto')) {
         $error = $this->upload->display_errors();
         $this->session->set_flashdata('error', "Masukan Gambar Produk untuk Menambah Produk");
+        $this->session->set_flashdata('failed', $error);
         redirect('Produk/inputProduk');
         }else {
             $pesan = 
@@ -112,9 +130,11 @@ class Produk extends CI_Controller {
                 'manfaat1' => $manfaat1,
                 'manfaat2' => $manfaat2,
                 'manfaat3' => $manfaat3,
-                'kategori' => $kategori,
+                'id_kategori' => $id_kategori,
                 'foto' => $this->upload->data('file_name'),
-                'link_wa' => $whatsapp_link
+                'link_wa' => $whatsapp_link,
+                'created_at' => date('Y-m-d H:i:s', strtotime('now')),
+                'created_by' => $this->session->userdata('id')
             );
 
             $this->ProdukModel->simpanProduk($data);
@@ -127,6 +147,10 @@ class Produk extends CI_Controller {
         $data['active_menu'] = 'data_produk';
         $data['data_produk']= $this->ProdukModel->getProdukById($id_produk);
         $data['data_produk']->harga = number_format($data['data_produk']->harga, 0, ',', '.');
+        // mengambil data kategori
+        $data['kategori'] = $this->ProdukModel->getKategoriProdukArray();
+
+        $this->load->view("admin/header", $data);
         $this->load->view("admin/edit-produk", $data);
         $this->load->view("admin/sidebar", $data);
     }
@@ -140,7 +164,7 @@ class Produk extends CI_Controller {
         $manfaat1 = $this->input->post('manfaat1');
         $manfaat2 = $this->input->post('manfaat2');
         $manfaat3 = $this->input->post('manfaat3');
-        $kategori = $this->input->post('kategori');
+        $id_kategori = $this->input->post('kategori');
 
         $pesan = 
             "Nama Lengkap: \n"
@@ -177,9 +201,11 @@ class Produk extends CI_Controller {
                     'manfaat1' => $manfaat1,
                     'manfaat2' => $manfaat2,
                     'manfaat3' => $manfaat3,
-                    'kategori' => $kategori,
+                    'id_kategori' => $id_kategori,
                     'foto' => $foto,
-                    'link_wa' => $whatsapp_link
+                    'link_wa' => $whatsapp_link,
+                    'updated_at' => date('Y-m-d H:i:s', strtotime('now')),
+                    'updated_by' => $this->session->userdata('id')
                 );
                 $this->ProdukModel->updateProduk($id_produk, $data);
                 $this->session->set_flashdata('success', 'Produk berhasil diperbarui dengan gambar baru.');
@@ -199,8 +225,10 @@ class Produk extends CI_Controller {
                 'manfaat1' => $manfaat1,
                 'manfaat2' => $manfaat2,
                 'manfaat3' => $manfaat3,
-                'kategori' => $kategori,
-                'link_wa' => $whatsapp_link
+                'id_kategori' => $id_kategori,
+                'link_wa' => $whatsapp_link,
+                'updated_at' => date('Y-m-d H:i:s', strtotime('now')),
+                'updated_by' => $this->session->userdata('id')
             );
             $this->ProdukModel->updateProduk($id_produk, $data);
             $this->session->set_flashdata('success', 'Produk berhasil diperbarui.');
@@ -237,6 +265,7 @@ class Produk extends CI_Controller {
         $data['active_menu'] = 'data_produk';
         $data['produk_terlaris'] = $this->ProdukModel->getProdukById($id_produk);
         // $data['produk_terlaris']->harga = 'Rp. ' . number_format($data['produk_terlaris']->harga, 0, ',', '.');
+        $this->load->view("admin/header", $data);
         $this->load->view("admin/update-terlaris", $data);
         $this->load->view("admin/sidebar", $data);
     }
@@ -263,6 +292,114 @@ class Produk extends CI_Controller {
 
     }
 
+    // Terkait Kategori Produk
+    public function tampilDataKategori(){
+        if (!$this->session->userdata('logged_in')) {
+            redirect('Admin/loginPage');
+        }else if ($this->session->userdata('role_id') == 2){
+            redirect('Admin/errorPage');
+        }
+        $data['active_menu'] = 'data_kategori';
+        $data['data_kategori'] = $this->ProdukModel->getKategoriProduk();
+
+        $this->load->view("admin/header", $data);
+        $this->load->view("admin/data-kategori", $data);
+        $this->load->view("admin/sidebar", $data);
+    }
+
+    public function tambahKategoriProduk(){
+        if (!$this->session->userdata('logged_in')) {
+            redirect('Admin/loginPage');
+        }else if ($this->session->userdata('role_id') == 2){
+            redirect('Admin/errorPage');
+        }
+        $data['active_menu'] = 'data_kategori';
+        $data['data_kategori'] = $this->ProdukModel->getKategoriProduk();
+
+        $this->load->view("admin/header", $data);
+        $this->load->view("admin/input-kategori", $data);
+        $this->load->view("admin/sidebar", $data);
+    }
+
+    public function simpanKategori(){
+        if (!$this->session->userdata('logged_in')) {
+            redirect('Admin/loginPage');
+        }else if ($this->session->userdata('role_id') == 2){
+            redirect('Admin/errorPage');
+        }
+        $data['active_menu'] = 'data_kategori';
+        $data = array(
+            'nama_kategori' => $this->input->post('nama_kategori'),
+            'deskripsi_kategori' => $this->input->post('deskripsi_kategori')
+        );
+
+        $result = $this->ProdukModel->simpanKategori($data);
+
+        if ($result) {
+            $this->session->set_flashdata('success', "Simpan Data Kategori Berhasil");
+        } else {
+            $this->session->set_flashdata('error', "Data Kategori Max 5");
+        }
+        redirect('Produk/tampilDataKategori');
+
+        $this->load->view("admin/header", $data);
+        $this->load->view("admin/input-kategori", $data);
+        $this->load->view("admin/sidebar", $data);
+    }
+
+    public function editKategoriProduk($id_kategori){
+        if (!$this->session->userdata('logged_in')) {
+            redirect('Admin/loginPage');
+        }else if ($this->session->userdata('role_id') == 2){
+            redirect('Admin/errorPage');
+        }
+        $data['active_menu'] = 'data_kategori';
+        $data['data_kategori'] = $this->ProdukModel->getKategoriProdukById($id_kategori);
+
+        $this->load->view("admin/header", $data);
+        $this->load->view("admin/edit-kategori", $data);
+        $this->load->view("admin/sidebar", $data);
+    }
+
+    public function updateKategori(){
+        if (!$this->session->userdata('logged_in')) {
+            redirect('Admin/loginPage');
+        }else if ($this->session->userdata('role_id') == 2){
+            redirect('Admin/errorPage');
+        }
+        $data['active_menu'] = 'data_kategori';
+        $data['data_kategori'] = $this->ProdukModel->getKategoriProduk();
+
+        $this->load->view("admin/header", $data);
+        $this->load->view("admin/data-kategori", $data);
+        $this->load->view("admin/sidebar", $data);
+    }
+
+    public function hapusKategoriProduk($id_kategori){
+        if (!$this->session->userdata('logged_in')) {
+            redirect('Admin/loginPage');
+        } else if ($this->session->userdata('role_id') == 2) {
+            redirect('Admin/errorPage');
+        }
+    
+        // Cek apakah ada relasi dengan tabel data_produk
+        $isRelated = $this->ProdukModel->cekRelasiDenganDataProduk($id_kategori);
+    
+        if (!$isRelated) {
+            // Jika tidak ada relasi, hapus kategori produk
+            $this->ProdukModel->hapusKategori($id_kategori);
+    
+            $this->session->set_flashdata('success', "Kategori Produk berhasil dihapus");
+        } else {
+            // Jika ada relasi, berikan keterangan
+            $this->session->set_flashdata('error', "Kategori Produk tidak dapat dihapus karena ada produk yang terkait.");
+        }
+    
+        redirect('Produk/tampilDataKategori');
+    }
+    
+
+
     public function search(){
         $data['active_menu'] = 'data_produk';
         $keyword = $this->input->get('keyword'); // Mendapatkan keyword pencarian dari input GET
@@ -274,7 +411,27 @@ class Produk extends CI_Controller {
         }
         
         // Tampilkan tampilan (view) dengan hasil pencarian
+        $this->load->view("admin/header", $data);
         $this->load->view("admin/data-produk", $data);
+        $this->load->view("admin/sidebar", $data);
+    }
+
+    public function searchKategori(){
+        if (!$this->session->userdata('logged_in')) {
+            redirect('Admin/loginPage');
+        }else if ($this->session->userdata('role_id') == 2){
+            redirect('Admin/errorPage');
+        }
+        $data['active_menu'] = 'data_kategori';
+        $keyword = $this->input->get('keyword'); // Mendapatkan keyword pencarian dari input GET
+        
+        // Lakukan pencarian data berdasarkan keyword
+        $data['data_kategori'] = $this->ProdukModel->searchKategori($keyword);
+
+        
+        // Tampilkan tampilan (view) dengan hasil pencarian
+        $this->load->view("admin/header", $data);
+        $this->load->view("admin/data-kategori", $data);
         $this->load->view("admin/sidebar", $data);
     }
 

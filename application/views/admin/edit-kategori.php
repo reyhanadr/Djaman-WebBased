@@ -6,70 +6,49 @@
               <div class="row">
                 <div class="col">
                     <div class="card mb-4">
-                      <h5 class="card-header">Edit Kontak</h5>
+                      <h5 class="card-header">Edit Kategori</h5>
                       <?php echo $this->session->flashdata("error"); ?>
 
                       <div class="card-body">
-                        <form action="<?php echo site_url('Kontak/update/'.$data_kontak->id_kontak); ?>" method="post" enctype="multipart/form-data">
+                        <form action="<?php echo site_url('Produk/updateKategori/'.$data_kategori->id_kategori); ?>" method="post" enctype="multipart/form-data">
                           <div class="mb-3">
-                            <label for="id_kontak" class="form-label">ID Kontak</label>
+                            <label for="nokategori" class="form-label">No. Kategori</label>
                             <input
                               type="text"
                               class="form-control"
-                              id="id_kontak"
-                              name="id_kontak"
-                              value="<?php echo $data_kontak->id_kontak; ?>"
+                              id="nokategori"
+                              name="nokategorinokategori"
+                              value="<?php echo $data_kategori->id_kategori; ?>"
                               readonly
                             />
                           </div>
                           <div class="mb-3">
-                              <label for="alamat" class="form-label">Alamat</label>
-                              <input
-                                type="text"
-                                class="form-control"
-                                id="alamat"
-                                name="alamat"
-                                value="<?php echo $data_kontak->alamat; ?>"
-                              />
-                          </div>
-
-                          <div class="mb-3">
-                              <label for="phone" class="form-label">No. Telepon (gunakan +62)</label>
-                              <input
-                                type="tel"
-                                class="form-control"
-                                id="phone"
-                                name="phone"
-                                value="<?php echo $data_kontak->phone; ?>"
-                              />
-                          </div>
-                          <div class="mb-3">
-                            <label for="email" class="form-label">Email</label>
-                            <input
-                              type="email"
-                              class="form-control"
-                              id="email"
-                              name="email"
-                              value="<?php echo $data_kontak->email; ?>"
-
-                            />
-                          </div>
-                          <div class="mb-3">
-                            <label for="maps" class="form-label">Maps</label>
+                            <label for="nama_kategori" class="form-label">Nama Kategori</label>
                             <input
                               type="text"
                               class="form-control"
-                              id="maps"
-                              name="maps"
-                              value="<?php echo $data_kontak->maps; ?>"
+                              id="nama_kategori"
+                              name="nama_kategori"
+                              value="<?php echo $data_kategori->nama_kategori; ?>"
                             />
+                          </div>
+                          <div class="mb-3">
+                              <label for="deskripsi" class="form-label">Deskripsi Kategori</label>
+                              <textarea
+                                type="text"
+                                class="form-control"
+                                id="deskripsi"
+                                name="deskripsi"
+                                rows="3"
+                              ><?php echo $data_kategori->deskripsi_kategori; ?>
+                              </textarea>
                           </div>
                         </div>
                     </div>
                     <div class="row">
                       <div class="mt-1">
-                        <button type="submit" class="btn btn-primary ">Simpan Perubahan</button>
-                        <a href="<?= base_url()?>index.php/Kontak/tampilKontak" class="btn btn-outline-primary">Batalkan</a>
+                        <button type="submit" class="btn btn-primary ">Perbarui Data</button>
+                        <a href="<?= base_url()?>index.php/Produk/tampilDataKategori" class="btn btn-outline-primary">Kembali</a>
                       </div>
                     </div>
                   </form>

@@ -6,52 +6,77 @@
               <div class="row">
                 <div class="col">
                     <div class="card mb-4">
-                      <h5 class="card-header">Edit Anggota</h5>
-                      <?php echo $this->session->flashdata("error"); ?>
+                      <h5 class="card-header">Tambah Data Admin</h5>
+                      
 
                       <div class="card-body">
-                        <form action="<?php echo site_url('Organisasi/update/'.$data_organisasi->id_anggota); ?>" method="post" enctype="multipart/form-data">
+                        <?php echo $this->session->flashdata("error"); ?>
+                        <form action="<?php echo site_url('Admin/simpanAdmin'); ?>" method="post" enctype="multipart/form-data">
                           <div class="mb-3">
-                            <label for="id_anggota" class="form-label">ID Anggota</label>
+                            <label for="id_produk" class="form-label">ID Admin</label>
                             <input
                               type="text"
                               class="form-control"
-                              id="id_anggota"
-                              name="id_anggota"
-                              value="<?php echo $data_organisasi->id_anggota; ?>"
+                              id="id_admin"
+                              name="id_admin"
                               placeholder="PJM001"
+                              value="<?php echo $newAdminId; ?>"
                               readonly
                             />
                           </div>
                           <div class="mb-3">
-                              <label for="nama" class="form-label">Nama Anggota</label>
+                              <label for="exampleFormControlInput1" class="form-label">Nama Admin</label>
                               <input
                                 type="text"
                                 class="form-control"
                                 id="nama"
                                 name="nama"
-                                value="<?php echo $data_organisasi->nama; ?>"
                               />
                           </div>
                           <div class="mb-3">
-                              <label for="jabatan" class="form-label">Jabatan</label>
+                              <label for="exampleFormControlInput1" class="form-label">Email Admin</label>
                               <input
-                                type="text"
+                                type="email"
                                 class="form-control"
-                                id="jabatan"
-                                name="jabatan"
-                                value="<?php echo $data_organisasi->jabatan; ?>"
+                                id="email"
+                                name="email"
                               />
                           </div>
                           <div class="mb-3">
-                            <label for="email" class="form-label">Email</label>
+                            <label for="exampleFormControlInput1" class="form-label">Username Admin</label>
                             <input
-                              type="email"
+                              type="text"
                               class="form-control"
-                              id="email"
-                              name="email"
-                              value="<?php echo $data_organisasi->email; ?>"
-
+                              id="username"
+                              name="username"
+                            />
+                          </div>
+                          <div class="mb-3">
+                            <label for="exampleFormControlInput1" class="form-label">Password Admin</label>
+                            <input
+                              type="password"
+                              class="form-control"
+                              id="password"
+                              name="password"
+                            />
+                          </div>
+                          <div class="mb-3">
+                            <label for="exampleFormControlInput1" class="form-label">Role Admin</label>
+                            <input
+                              type="text"
+                              class="form-control"
+                              id="namarole"
+                              name="namarole"
+                              readonly
+                              value="<?= $data_roles->nama_role?>"
+                            />
+                            <input
+                              type="text"
+                              class="form-control"
+                              id="role_id"
+                              name="role_id"
+                              hidden
+                              value="<?= $data_roles->role_id?>"
                             />
                           </div>
                           <hr class="m-0">
@@ -59,15 +84,16 @@
                           <!-- Foto -->
                           <div class="mt-4">
                             <div class="d-flex align-items-start align-items-sm-center gap-4">
-                              <img style="max-width: 100%; height: auto; width: 100px;"
-                                src="<?php echo base_url('/assets/img/anggota/'.$data_organisasi->foto); ?>"
-                                alt="foto-anggota"
+                              <img style="max-width: 100%; height: auto; width: 150px;"
+                                src="<?= base_url()?>/assets/img/avatars/1.png"
+                                alt="user-avatar"
                                 class="d-block rounded "
+
                                 id="uploadedAvatar"
                               />
                               <div class="button-wrapper">
                                 <label for="upload" class="btn btn-primary me-2 mb-4" tabindex="0">
-                                  <span class="d-none d-sm-block">Upload Foto Anggota</span>
+                                  <span class="d-none d-sm-block">Upload Foto Admin</span>
                                   <i class="bx bx-upload d-block d-sm-none"></i>
                                   <input
                                     type="file"
@@ -93,12 +119,11 @@
                       </div>
                     </div>
                     <div class="row">
-                      <div class="mt-1">
-                        <button type="submit" class="btn btn-primary ">Simpan Perubahan</button>
-                        <a href="<?= base_url()?>index.php/Organisasi/tampilDataOrganisasi" class="btn btn-outline-primary">Batalkan</a>
-                      </div>
+                            <div class="col-12 col-md-8 col-lg-4 order-3 order-md-2 mb-4 ">
+                                <button type="submit" class="btn btn-primary ">Tambah Data</button>
+                            </div>
                     </div>
-                  </form>
+                    </form>
                   </div>
                 </div>
               </div>
@@ -156,5 +181,23 @@
 
     <!-- Place this tag in your head or just before your close body tag. -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <script>
+      $(document).ready(function() {
+        $('#harga').on('input', function() {
+          var inputHarga = $(this).val();
+          var angka = inputHarga.replace(/\D/g, '');
+          var hargaFormatted = angka.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+          
+          // Hapus tanda titik pemisah ribuan sebelum mengirim data
+          var hargaInt = parseInt(angka.replace(/\./g, ''));
+          
+          // Set nilai input dengan format harga
+          $(this).val(hargaFormatted);
+          
+          // Set nilai input tersembunyi (hidden input) dengan harga integer
+          $('#hidden_harga').val(hargaInt);
+        });
+      });
+    </script>
   </body>
 </html>

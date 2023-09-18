@@ -16,7 +16,17 @@ class Organisasi extends CI_Controller {
     public function tampilDataOrganisasi(){
         $data['active_menu'] = 'data_organisasi';
         $data['data_organisasi']= $this->OrganisasiModel->getOrganisasi();
+        $this->load->view("admin/header", $data);
         $this->load->view("admin/data-organisasi", $data);
+        $this->load->view("admin/sidebar", $data);
+
+    }
+
+    public function detailOrganisasi($id_anggota){
+        $data['active_menu'] = 'data_organisasi';
+        $data['data_anggota']= $this->OrganisasiModel->getOrganisasiById($id_anggota);
+        $this->load->view("admin/header", $data);
+        $this->load->view("admin/detail-organisasi", $data);
         $this->load->view("admin/sidebar", $data);
 
     }
@@ -24,6 +34,7 @@ class Organisasi extends CI_Controller {
     public function editOrganisasi($id_anggota){
         $data['active_menu'] = 'data_organisasi';
         $data['data_organisasi']= $this->OrganisasiModel->getOrganisasiById($id_anggota);
+        $this->load->view("admin/header", $data);
         $this->load->view("admin/edit-anggota", $data);
         $this->load->view("admin/sidebar", $data);
 

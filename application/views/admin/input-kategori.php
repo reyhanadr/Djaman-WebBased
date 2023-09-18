@@ -6,73 +6,36 @@
               <div class="row">
                 <div class="col">
                     <div class="card mb-4">
-                      <h5 class="card-header">Edit Kontak</h5>
-                      <?php echo $this->session->flashdata("error"); ?>
+                      <h5 class="card-header">Tambah Produk</h5>
+                      
 
                       <div class="card-body">
-                        <form action="<?php echo site_url('Kontak/update/'.$data_kontak->id_kontak); ?>" method="post" enctype="multipart/form-data">
+                        <?php echo $this->session->flashdata("error"); ?>
+                        <form action="<?php echo site_url('Produk/simpanKategori'); ?>" method="post" enctype="multipart/form-data">
                           <div class="mb-3">
-                            <label for="id_kontak" class="form-label">ID Kontak</label>
+                            <label for="id_produk" class="form-label">Nama Kategori</label>
                             <input
                               type="text"
                               class="form-control"
-                              id="id_kontak"
-                              name="id_kontak"
-                              value="<?php echo $data_kontak->id_kontak; ?>"
-                              readonly
+                              name="nama_kategori"
+                              placeholder="cth: Jamu Segar"
                             />
-                          </div>
-                          <div class="mb-3">
-                              <label for="alamat" class="form-label">Alamat</label>
-                              <input
-                                type="text"
-                                class="form-control"
-                                id="alamat"
-                                name="alamat"
-                                value="<?php echo $data_kontak->alamat; ?>"
-                              />
                           </div>
 
-                          <div class="mb-3">
-                              <label for="phone" class="form-label">No. Telepon (gunakan +62)</label>
-                              <input
-                                type="tel"
-                                class="form-control"
-                                id="phone"
-                                name="phone"
-                                value="<?php echo $data_kontak->phone; ?>"
-                              />
+                          <div>
+                              <label for="deskripsi" class="form-label">Deskripsi Kategori</label>
+                              <textarea class="form-control" id="deskripsi" name="deskripsi_kategori" rows="3"></textarea>
                           </div>
-                          <div class="mb-3">
-                            <label for="email" class="form-label">Email</label>
-                            <input
-                              type="email"
-                              class="form-control"
-                              id="email"
-                              name="email"
-                              value="<?php echo $data_kontak->email; ?>"
-
-                            />
-                          </div>
-                          <div class="mb-3">
-                            <label for="maps" class="form-label">Maps</label>
-                            <input
-                              type="text"
-                              class="form-control"
-                              id="maps"
-                              name="maps"
-                              value="<?php echo $data_kontak->maps; ?>"
-                            />
-                          </div>
-                        </div>
+                         
+                      </div>
                     </div>
                     <div class="row">
                       <div class="mt-1">
-                        <button type="submit" class="btn btn-primary ">Simpan Perubahan</button>
-                        <a href="<?= base_url()?>index.php/Kontak/tampilKontak" class="btn btn-outline-primary">Batalkan</a>
+                        <button type="submit" class="btn btn-primary ">Tambah Kategori</button>
+                        <a href="<?= base_url()?>index.php/Produk/tampilDataKategori" class="btn btn-outline-primary">Kembali</a>
                       </div>
                     </div>
-                  </form>
+                    </form>
                   </div>
                 </div>
               </div>
@@ -130,5 +93,23 @@
 
     <!-- Place this tag in your head or just before your close body tag. -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <script>
+      $(document).ready(function() {
+        $('#harga').on('input', function() {
+          var inputHarga = $(this).val();
+          var angka = inputHarga.replace(/\D/g, '');
+          var hargaFormatted = angka.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+          
+          // Hapus tanda titik pemisah ribuan sebelum mengirim data
+          var hargaInt = parseInt(angka.replace(/\./g, ''));
+          
+          // Set nilai input dengan format harga
+          $(this).val(hargaFormatted);
+          
+          // Set nilai input tersembunyi (hidden input) dengan harga integer
+          $('#hidden_harga').val(hargaInt);
+        });
+      });
+    </script>
   </body>
 </html>
