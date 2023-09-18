@@ -1,160 +1,3 @@
-<!DOCTYPE html>
-
-<!-- =========================================================
-* Sneat - Bootstrap 5 HTML Admin Template - Pro | v1.0.0
-==============================================================
-
-* Product Page: https://themeselection.com/products/sneat-bootstrap-html-admin-template/
-* Created by: ThemeSelection
-* License: You must have a valid license purchased in order to legally use the theme for your project.
-* Copyright ThemeSelection (https://themeselection.com)
-
-=========================================================
- -->
-<!-- beautify ignore:start -->
-<html
-  lang="en"
-  class="light-style layout-menu-fixed"
-  dir="ltr"
-  data-theme="theme-default"
-  data-assets-path="assets/"
-  data-template="vertical-menu-template-free"
->
-  <head>
-    <meta charset="utf-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"
-    />
-
-    <title>Data Produk - Djaman Admin</title>
-
-    <meta name="description" content="" />
-    <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="<?= base_url()?>/assets/img/favicon/favicon.ico" />
-
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
-      rel="stylesheet"
-    />
-
-    <!-- Icons. Uncomment required icon fonts -->
-    <link rel="stylesheet" href="<?= base_url()?>/assets/vendor/fonts/boxicons.css" />
-
-    <!-- Core CSS -->
-    <link rel="stylesheet" href="<?= base_url()?>/assets/vendor/css/core.css" class="template-customizer-core-css" />
-    <link rel="stylesheet" href="<?= base_url()?>/assets/vendor/css/theme-default.css" class="template-customizer-theme-css" />
-    <link rel="stylesheet" href="<?= base_url()?>/assets/css/demo.css" />
-
-    <!-- Vendors CSS -->
-    <link rel="stylesheet" href="<?= base_url()?>/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
-
-    <link rel="stylesheet" href="<?= base_url()?>/assets/vendor/libs/apex-charts/apex-charts.css" />
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css">
-    
-    <!-- Page CSS -->
-
-    <!-- Helpers -->
-    <script src="<?= base_url()?>/assets/vendor/js/helpers.js"></script>
-
-    <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
-    <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
-    <script src="<?= base_url()?>/assets/js/config.js"></script>
-
-  </head>
-
-  <body>
-    <!-- Layout wrapper -->
-    <div class="layout-wrapper layout-content-navbar">
-      <div class="layout-container">
-
-        <!-- Layout container -->
-        <div class="layout-page">
-          <!-- Navbar -->
-
-          <nav
-            class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme"
-            id="layout-navbar"
-          >
-            <div class="layout-menu-toggle navbar-nav align-items-xl-center me-3 me-xl-0 d-xl-none">
-              <a class="nav-item nav-link px-0 me-xl-4" href="javascript:void(0)">
-                <i class="bx bx-menu bx-sm"></i>
-              </a>
-            </div>
-
-            <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
-              <!-- Search -->
-              <div class="navbar-nav align-items-center">
-                <div class="nav-item d-flex align-items-center">
-                  <i class="bx bx-search fs-4 lh-0"></i>
-                  <form action="<?= site_url('Admin/search') ?>" method="GET">
-                  <input
-                    type="text"
-                    class="form-control border-0 shadow-none"
-                    placeholder="Search..."
-                    aria-label="Search..."
-                    name="keyword"
-                  />
-                  </form>
-                </div>
-              </div>
-              <!-- /Search -->
-
-              <ul class="navbar-nav flex-row align-items-center ms-auto">
-
-                <!-- User -->
-                <li class="nav-item navbar-dropdown dropdown-user dropdown">
-                  <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
-                    <div class=" avatar-online">
-                      <img src="<?= base_url()?>/assets/img/avatars/<?php echo $this->session->userdata('foto'); ?>" alt class="w-px-40 h-px-50 rounded-circle" />
-                    </div>
-                  </a>
-                  <ul class="dropdown-menu dropdown-menu-end">
-                    <li>
-                      <a class="dropdown-item" href="#">
-                        <div class="d-flex">
-                          <div class="flex-shrink-0 me-3">
-                            <div class="avatar avatar-online">
-                              <img src="<?= base_url()?>/assets/img/avatars/<?php echo $this->session->userdata('foto'); ?>" alt class="w-px-40 h-px-50  rounded-circle" />
-                            </div>
-                          </div>
-                          <div class="flex-grow-1">
-                            <span class="fw-semibold d-block"><?php echo $this->session->userdata('username'); ?></span>
-                            <small class="text-muted">Admin</small>
-                          </div>
-                        </div>
-                      </a>
-                    </li>
-                    <li>
-                      <div class="dropdown-divider"></div>
-                    </li>
-                    <li>
-                      <a class="dropdown-item" href="../Profile/tampilEditProfile">
-                        <i class="bx bx-cog me-2"></i>
-                        <span class="align-middle">Pengaturan Profil</span>
-                      </a>
-                    </li>
-                    <li>
-                      <div class="dropdown-divider"></div>
-                    </li>
-                    <li>
-                      <a class="dropdown-item" href="<?php echo site_url('Admin/logout');?>">
-                        <i class="bx bx-power-off me-2"></i>
-                        <span class="align-middle">Log Out</span>
-                      </a>
-                    </li>
-                  </ul>
-                </li>
-                <!--/ User -->
-              </ul>
-            </div>
-          </nav>
-
-          <!-- / Navbar -->
-
           <!-- Content wrapper -->
           <div class="content-wrapper">
             <!-- Content -->
@@ -164,7 +7,7 @@
                 <!-- Basic Bootstrap Table -->
                 <div class="card">
                   <h5 class="card-header">Data Produk</h5>
-                  <div class="card-body">
+                    <div class="card-body">
                       <div class="row">
                         <div class="col-12 col-md-8 col-lg-4 order-3 order-md-2">
                           <form action="<?= site_url('produk/search') ?>" method="GET">
@@ -222,7 +65,7 @@
                     );
 
                     $this->table->set_template($template);
-                    $this->table->set_heading('No.', 'Terlaris', 'Foto', 'ID Produk', 'Nama Jamu', 'Satuan', 'Harga', 'Deskripsi', 'Manfaat 1', 'Manfaat 2', 'Manfaat 3', 'Kategori', 'Link Whatsapp Bisnis', 'Aksi');
+                    $this->table->set_heading('No.', 'Terlaris', 'Foto Produk', 'Nama Produk', 'Satuan', 'Harga', 'Deskripsi', 'Manfaat 1', 'Manfaat 2', 'Manfaat 3', 'Kategori', 'Link Whatsapp Bisnis', 'Aksi');
 
                     foreach ($data_produk as $item) {
                         $no_tampil = '<strong >' . $no++ . '.</strong>';
@@ -232,21 +75,27 @@
                         </a>
                         ';
                         $id_jamu= '<strong data-id="$item->id_produk">' . htmlentities($item->id_produk) . '</strong>';
-                        $foto_produk = '<img src="' . base_url('assets/img/produk/' . htmlentities($item->foto)) . '" alt="Avatar" class="avatar " >';
+                        $foto_produk = '
+                            <a href="' . site_url('Produk/DetailProduk/' . htmlentities($item->id_produk)) . '">
+                                <img style="max-width: 100%; height: auto; width: 100px;" src="' . base_url() . 'assets/img/produk/' . htmlentities($item->foto) . '" alt="fotoProduk" class="avatar">
+                            </a>';
                         $dropdown_menu = '
                           <div class="dropdown">
                               <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
                                   <i class="bx bx-dots-vertical-rounded"></i>
                               </button>
                               <div class="dropdown-menu">
+                                <a class="dropdown-item" href="' . site_url('Produk/detailProduk/' . htmlentities($item->id_produk)) . '">
+                                    <i class="bx bx-detail me-1"></i> Detail Produk
+                                </a>
                                   <a class="dropdown-item" href="' . site_url('Produk/editProduk/' . htmlentities($item->id_produk)) . '">
                                       <i class="bx bx-edit-alt me-1"></i> Edit
                                   </a>
                                   <a class="dropdown-item" href="' . site_url('Produk/hapus/' . htmlentities($item->id_produk)) . '">
-                                      <i class="bx bx-trash me-1"></i> Delete
+                                      <i class="bx bx-trash me-1"></i> Hapus
                                   </a>
                                   <a class="dropdown-item" href="' . site_url('Produk/UpdateDataTerlaris/' . htmlentities($item->id_produk)) . '">
-                                      <i class="bx bx-star me-1"></i> Terlaris
+                                      <i class="bx bx-star me-1"></i> Jadikan Terlaris
                                   </a>
                               </div>
                           </div>';
@@ -255,7 +104,6 @@
                           $no_tampil,
                           $terlaris_btn,
                           $foto_produk,
-                          $id_jamu,
                           strlen($item->nama_jamu) > 20 ? substr(htmlentities($item->nama_jamu), 0, 20) . '...' : htmlentities($item->nama_jamu),
                           strlen($item->satuan) > 10 ? substr(htmlentities($item->satuan), 0, 10) . '...' : htmlentities($item->satuan),
                           htmlentities($item->harga),
@@ -263,7 +111,7 @@
                           strlen($item->manfaat1) > 30 ? substr(htmlentities($item->manfaat1), 0, 30) . '...' : htmlentities($item->manfaat1),
                           strlen($item->manfaat2) > 30 ? substr(htmlentities($item->manfaat2), 0, 30) . '...' : htmlentities($item->manfaat2),
                           strlen($item->manfaat3) > 30 ? substr(htmlentities($item->manfaat3), 0, 30) . '...' : htmlentities($item->manfaat3),
-                          htmlentities($item->kategori),
+                          $item->kategori,
                           strlen($item->link_wa) > 5 ? substr(htmlentities($item->link_wa), 0, 30) . '...' : htmlentities($item->link_wa),
                           $dropdown_menu
                         );
@@ -278,7 +126,7 @@
               <div class="row">
                 <div class="col-12 col-md-8 col-lg-4 order-3 order-md-2 py-3 mb-4">
                     <a href="inputProduk">
-                        <button type="button" class="btn btn-primary ">Tambah Data</button>
+                        <button type="button" class="btn btn-primary ">Tambah Produk</button>
                     </a>
                 </div>
               </div>
