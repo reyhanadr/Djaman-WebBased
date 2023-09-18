@@ -85,6 +85,15 @@
                 <div data-i18n="Basic">Data Produk</div>
               </a>
             </li>
+            <li class="menu-item <?php if ($active_menu === 'data_kategori') echo 'active'; ?>">
+              <?php if ($this->session->userdata('role_id') == 1) : ?>
+                <a href="<?= base_url()?>index.php/Produk/tampilDataKategori" class="menu-link">
+                  <i class="menu-icon tf-icons bx bx-category"></i>
+                  <div data-i18n="Basic">Kategori Produk</div>
+                </a>
+              <?php endif; ?>
+            </li>
+
             
             <li class="menu-item <?php if ($active_menu === 'produk_terlaris') echo 'active'; ?>">
               <a href="<?= base_url()?>#Terlaris" class="menu-link" target="_blank">
@@ -92,22 +101,52 @@
                 <div data-i18n="Basic">Produk Terlaris</div>
               </a>
 
-
             </li>
 
             <!-- Misc -->
-            <li class="menu-header small text-uppercase"><span class="menu-header-text">Organisasi, Pertanyaan dan Saran</span></li>
-            <li class="menu-item <?php if ($active_menu === 'data_organisasi') echo 'active'; ?>">
-              <a href="<?= base_url()?>index.php/Organisasi/tampilDataOrganisasi" class="menu-link">
-                <i class="menu-icon tf-icons bx bxs-user-account"></i>
-                <div data-i18n="Basic">Data Organisasi</div>
-              </a>
+            <li class="menu-header small text-uppercase"><span class="menu-header-text">Terkait Situs, Organisasi, Pertanyaan dan Saran</span></li>
+            <li class="menu-item <?php if ($active_menu === 'data_linkEmbed') echo 'active'; ?>">
+              <?php if ($this->session->userdata('role_id') == 1) : ?>
+                <a href="<?= base_url()?>index.php/Admin/tampilLinkEmbed" class="menu-link">
+                  <i class="menu-icon tf-icons bx bx-link"></i>
+                  <div data-i18n="Basic">Link Embed Instagram</div>
+                </a>
+              <?php endif; ?>
             </li>
+            <li class="menu-item <?php if ($active_menu === 'data_organisasi') echo 'active'; ?>">
+              <?php if ($this->session->userdata('role_id') == 1) : ?>
+                <a href="<?= base_url() ?>index.php/Organisasi/tampilDataOrganisasi" class="menu-link">
+                  <iconify-icon class="menu-icon tf-icons" icon="clarity:organization-solid"></iconify-icon>
+                  <div data-i18n="Basic">Data Anggota Organisasi</div>
+                </a>
+              <?php endif; ?>
+            </li>
+
             <li class="menu-item <?php if ($active_menu === 'data_kontak') echo 'active'; ?>">
-              <a href="<?= base_url()?>index.php/Kontak/tampilKontak" class="menu-link">
-                <i class="menu-icon tf-icons bx bxs-contact"></i>
-                <div data-i18n="Basic">Data Kontak</div>
-              </a>
+              <?php if ($this->session->userdata('role_id') == 1) : ?>
+                <a href="<?= base_url() ?>index.php/Kontak/tampilKontak" class="menu-link">
+                  <i class="menu-icon tf-icons bx bxs-contact"></i>
+                  <div data-i18n="Basic">Data Kontak</div>
+                </a>
+              <?php endif; ?>
+            </li>
+
+            <li class="menu-item <?php if ($active_menu === 'jam_operasional') echo 'active'; ?>">
+              <?php if ($this->session->userdata('role_id') == 1) : ?>
+                <a href="<?= base_url() ?>index.php/Admin/tampilJamOperasional" class="menu-link">
+                  <i class="menu-icon tf-icons bx bxs-time"></i>
+                  <div data-i18n="Basic">Jam Operasional</div>
+                </a>
+              <?php endif; ?>
+            </li>
+
+            <li class="menu-item <?php if ($active_menu === 'data_admin') echo 'active'; ?>">
+              <?php if ($this->session->userdata('role_id') == 1) : ?>
+                <a href="<?= base_url()?>index.php/Admin/tampilDataAdmin" class="menu-link">
+                  <i class="menu-icon tf-icons bx bxs-user-account"></i>
+                  <div data-i18n="Basic">Data Admin</div>
+                </a>
+              <?php endif; ?>
             </li>
             <li class="menu-item <?php if ($active_menu === 'asknsugest') echo 'active'; ?>">
               <a href="<?= base_url()?>index.php/Asknsugest/tampilAsknsugest" class="menu-link">
@@ -115,6 +154,7 @@
                 <div data-i18n="Basic">Kumpulan Pertanyaan & Saran</div>
               </a>
             </li>
+
           </ul>
         </aside>
         <!-- / Menu -->
@@ -127,5 +167,7 @@
                 // See https://cloud.google.com/recaptcha-enterprise/docs/create-assessment
             });
         </script>
+        <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+
 </body>
 </html>

@@ -12,10 +12,11 @@
         }
 
         
-        public function tampilEditProfile(){
+        public function tampilEditProfile($id_profile){
             $data['active_menu'] = 'dashboard';
-            $id_profile = $this->session->userdata('logged_in');
             $data['admin']= $this->ProfileModel->getProfileById($id_profile);
+            
+            $this->load->view("admin/header", $data);
             $this->load->view("admin/edit-profile", $data);
             $this->load->view("admin/sidebar", $data);
         }
@@ -29,7 +30,7 @@
         
             // Memeriksa apakah ada file foto yang diupload
             if ($_FILES['foto']['name']) {
-                $config['upload_path'] = 'assets/img/avatars'; // Lokasi penyimpanan foto
+                $config['upload_path'] = 'assets/img/admin'; // Lokasi penyimpanan foto
                 $config['allowed_types'] = 'jpg|jpeg|png';
                 $config['max_size'] = 2048; // Batasan ukuran file (dalam KB)
         
@@ -39,7 +40,7 @@
                     $uploaded_data = $this->upload->data();
                     $foto = $uploaded_data['file_name'];
         
-                    // Mengupdate data produk beserta foto
+                    // Mengupdate Profile beserta foto
                     $data = array(
                         'nama' => $nama,
                         'email' => $email,
@@ -79,7 +80,7 @@
                 $this->session->set_flashdata('success', 'Profile berhasil diperbarui');
             }
         
-            redirect('admin');
+            redirect('Profile/tampilEditProfile/' . $id_profile);
         }
         
 
