@@ -20,7 +20,16 @@ class Asknsugest extends CI_Controller {
     public function tampilAsknsugest(){
         $data['active_menu'] = 'asknsugest';
         $data['asknsugest']= $this->AsknsugestModel->getAsknsugest();
+        $this->load->view("admin/header", $data);
         $this->load->view("admin/asknsugest", $data);
+        $this->load->view("admin/sidebar", $data);
+    }
+
+    public function detailAsknsugest($id){
+        $data['active_menu'] = 'asknsugest';
+        $data['data_asknsugest']= $this->AsknsugestModel->getAsknsugestById($id);
+        $this->load->view("admin/header", $data);
+        $this->load->view("admin/detail-asknsugest", $data);
         $this->load->view("admin/sidebar", $data);
     }
 

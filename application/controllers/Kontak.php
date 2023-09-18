@@ -7,6 +7,8 @@ class Kontak extends CI_Controller {
         $this->load->helper('url'); 
         $this->load->model('KontakModel');
         $this->load->library('session');
+        $this->load->library('table');
+
         if (!$this->session->userdata('logged_in')) {
             redirect('Admin/loginPage');
         }
@@ -15,17 +17,27 @@ class Kontak extends CI_Controller {
     public function tampilKontak(){
         $data['active_menu'] = 'data_kontak';
         $data['data_kontak']= $this->KontakModel->getKontak();
+        $this->load->view("admin/header", $data);
         $this->load->view("admin/data-kontak", $data);
         $this->load->view("admin/sidebar", $data);
 
     }
 
+    public function detailKontak($id_kontak){
+        $data['active_menu'] = 'data_kontak';
+        $data['data_kontak'] = $this->KontakModel->getKontakById($id_kontak);
+
+        $this->load->view("admin/header", $data);
+        $this->load->view("admin/detail-kontak", $data);
+        $this->load->view("admin/sidebar", $data);
+    }
+
     public function editKontak($id_kontak){
         $data['active_menu'] = 'data_kontak';
         $data['data_kontak']= $this->KontakModel->getKontakById($id_kontak);
+        $this->load->view("admin/header", $data);
         $this->load->view("admin/edit-kontak", $data);
         $this->load->view("admin/sidebar", $data);
-
     }
 
     public function update($id_kontak){
