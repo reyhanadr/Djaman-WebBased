@@ -8,6 +8,12 @@ class AsknsugestModel extends CI_Model {
         return $this->db->count_all('asknsugest');
     }
 
+    public function getAsknsugestById($id){
+        $this->db->where('id', $id);
+        $query = $this->db->get('asknsugest');
+        return $query->row();
+    }
+
     public function insertAsknsugest($data){
         return $this->db->insert("asknsugest", $data);
     }
