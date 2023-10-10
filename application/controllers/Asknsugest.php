@@ -11,27 +11,99 @@ class Asknsugest extends CI_Controller {
         $this->load->helper('url'); 
         $this->load->model('AsknsugestModel');
         $this->load->library('session');
+        $this->load->library('table');
+
         // $this->load->library('PhpSpreadsheet'); // Load PHPExcel library
         if (!$this->session->userdata('logged_in')) {
             redirect('Admin/loginPage');
         }
     }
     
+    
+    public function tampilDataEmail(){
+        $data['active_menu'] = 'data-email';
+        $data['data_email']= $this->AsknsugestModel->getEmailSubs();
+        $this->load->view("admin/template/header", $data);
+        $this->load->view("admin/data-email", $data);
+        $this->load->view("admin/template/sidebar", $data);
+        $this->load->view("admin/template/footer", $data);
+        $this->load->view("admin/modal/modal-hapus-emailsubs", $data);
+    }
+
+    public function hapusEmail($email) {
+        // Panggil fungsi model untuk menghapus email
+        $result = $this->AsknsugestModel->hapusEmail($email);
+
+        if ($result) {
+            $this->session->set_flashdata('success', 'Email berhasil dihapus.');
+        } else {
+            $this->session->set_flashdata('error', 'Email tidak ditemukan atau gagal dihapus.');
+        }
+
+        redirect('Asknsugest/tampilDataEmail'); // Ganti dengan URL tampilan email yang sesuai
+    }
+    
     public function tampilAsknsugest(){
         $data['active_menu'] = 'asknsugest';
         $data['asknsugest']= $this->AsknsugestModel->getAsknsugest();
-        $this->load->view("admin/header", $data);
+        $this->load->view("admin/template/header", $data);
+        $this->load->view("admin/template/sidebar", $data);
         $this->load->view("admin/asknsugest", $data);
-        $this->load->view("admin/sidebar", $data);
+        $this->load->view("admin/template/footer", $data);
     }
 
     public function detailAsknsugest($id){
         $data['active_menu'] = 'asknsugest';
         $data['data_asknsugest']= $this->AsknsugestModel->getAsknsugestById($id);
-        $this->load->view("admin/header", $data);
-        $this->load->view("admin/detail-asknsugest", $data);
-        $this->load->view("admin/sidebar", $data);
+        $this->load->view("admin/template/header", $data);
+        $this->load->view("admin/detail/detail-asknsugest", $data);
+        $this->load->view("admin/template/sidebar", $data);
+        $this->load->view("admin/template/footer", $data);
     }
+
+    public function exportData() {
+        // Query untuk mengambil data dari database
+        $data = $this->db->get('asknsugest')->result();
+    
+        // Judul dengan tanggal ekspor
+        $title = "Data Ekspor Ask n Suggest pada " . date('Y-m-d', strtotime('now'));
+    
+        // Konfigurasi header untuk file Excel
+        header("Content-Type: application/xls");
+        header("Content-Disposition: attachment; filename=exportAsknSugest " . date('Y-m-d', strtotime('now')) . ".xls");
+    
+        // Membuat header kolom dengan tag tambahan untuk lebar kolom dan garis
+        $output = "<table border='1'>";
+        $output .= "<tr>";
+        $output .= "<th colspan='6'>$title</th>";
+        $output .= "</tr>";
+        $output .= "<tr>";
+        $output .= "<th style='width: 100px;'>No.</th>";
+        $output .= "<th style='width: 300px;'>Nama</th>";
+        $output .= "<th style='width: 500px;'>Email</th>";
+        $output .= "<th style='width: 300px;'>No. Telepon</th>";
+        $output .= "<th style='width: 300px;'>Subjek/Judul Pesan</th>";
+        $output .= "<th style='width: 500px;'>Isi Pesan</th>";
+        $output .= "</tr>";
+    
+        // Isi data ke dalam file Excel
+        foreach ($data as $item) {
+            $output .= "<tr>";
+            $output .= "<td>".$item->id."</td>";
+            $output .= "<td>".$item->nama."</td>";
+            $output .= "<td>".$item->email."</td>";
+            $output .= "<td>'".$item->phone."</td>";
+            $output .= "<td>".$item->subject."</td>";
+            $output .= "<td>".$item->message."</td>";
+            $output .= "</tr>";
+        }
+    
+        $output .= "</table>";
+    
+        echo $output;
+    }
+    
+    
 
     // Pastikan Anda telah memuat library PhpSpreadsheet di atasnya, misalnya:
     // use PhpOffice\PhpSpreadsheet\Spreadsheet;
