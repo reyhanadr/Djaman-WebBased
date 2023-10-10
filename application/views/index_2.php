@@ -1,5 +1,3 @@
-
-
 	<!-- home page slider -->
 	<div class="homepage-slider">
 		<!-- single home slider -->
@@ -70,22 +68,22 @@
 				<div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
 					<div class="list-box d-flex align-items-center">
 						<div class="list-icon">
-							<i class="fas fa-shipping-fast"></i>
+							<i class="fas fa-microscope"></i>
 						</div>
 						<div class="content">
-							<h3>Gratis Ongkir</h3>
-							<p>Minimal order Rp.100.000</p>
+							<h3>Pembuatan dengan Standarisasi</h3>
+							<p>Setiap produk kami diproduksi dengan cermat untuk memastikan keamanan dan efektivitasnya.</p>
 						</div>
 					</div>
 				</div>
 				<div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
 					<div class="list-box d-flex align-items-center">
 						<div class="list-icon">
-							<i class="fas fa-money-bill-alt"></i>
+							<i class="fas fa-receipt"></i>
 						</div>
 						<div class="content">
-							<h3>Harga Terbaik</h3>
-							<p>Harga yang kompetitif dipasaran</p>
+							<h3>Resep Rahasia dan Warisan Leluhur</h3>
+							<p>Pengalaman dan pengetahuan Djaman dalam pembuatan jamu ini telah dijaga dengan baik selama bertahun-tahun.</p>
 						</div>
 					</div>
 				</div>
@@ -96,7 +94,7 @@
 						</div>
 						<div class="content">
 							<h3>Kemasan Aman</h3>
-							<p>Dengan kemasan yang aman untuk pengiriman online</p>
+							<p>Kami menggunakan metode pengemasan yang sesuai dengan standar keamanan dan kebersihan yang ketat.</p>
 						</div>
 					</div>
 				</div>
@@ -123,7 +121,7 @@
 				<div class="col-lg-4 col-md-6 text-center">
 					<div class="single-product-item">
 						<div class="product-image">
-							<a href="index.php/Home/SingleProduk/<?php echo $produk->id_produk; ?>"><img src="<?= base_url()?>/assets/img/produk/<?php echo $produk->foto; ?>" alt=""></a>
+							<a href="index.php/Home/SingleProduk/<?php echo $produk->id_produk; ?>"><img src="<?= base_url()?>assets/img/produk/<?php echo $produk->foto; ?>" alt="fotoProduk"></a>
 						</div>
 						<h3><?php echo $produk->nama_jamu; ?></h3>
 						<?php if ($is_diskon_harga == $produk->id_produk ) : ?>
@@ -170,7 +168,7 @@
                                 </span>
                             </div>
                         </div>
-                    	<img src="<?= base_url()?>/assets/img/produk/<?php echo $produk_terlaris->foto; ?>" alt="">
+                    	<img src="<?= base_url()?>assets/img/produk/<?php echo $produk_terlaris->foto; ?>" alt="fotoProduk">
                     </div>
                 </div>
                 <!--Content Column-->
@@ -198,61 +196,6 @@
         </div>
     </section>
     <!-- end cart banner section -->
-
-	<!-- testimonail-section -->
-	<!-- <div class="testimonail-section mt-150 mb-150">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-10 offset-lg-1 text-center">
-					<div class="testimonial-sliders">
-						<div class="single-testimonial-slider">
-							<div class="client-avater">
-								<img src="assets/img/avaters/avatar1.png" alt="">
-							</div>
-							<div class="client-meta">
-								<h3>Saira Hakim <span>Local shop owner</span></h3>
-								<p class="testimonial-body">
-									" Sed ut perspiciatis unde omnis iste natus error veritatis et  quasi architecto beatae vitae dict eaque ipsa quae ab illo inventore Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium "
-								</p>
-								<div class="last-icon">
-									<i class="fas fa-quote-right"></i>
-								</div>
-							</div>
-						</div>
-						<div class="single-testimonial-slider">
-							<div class="client-avater">
-								<img src="assets/img/avaters/avatar2.png" alt="">
-							</div>
-							<div class="client-meta">
-								<h3>David Niph <span>Local shop owner</span></h3>
-								<p class="testimonial-body">
-									" Sed ut perspiciatis unde omnis iste natus error veritatis et  quasi architecto beatae vitae dict eaque ipsa quae ab illo inventore Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium "
-								</p>
-								<div class="last-icon">
-									<i class="fas fa-quote-right"></i>
-								</div>
-							</div>
-						</div>
-						<div class="single-testimonial-slider">
-							<div class="client-avater">
-								<img src="assets/img/avaters/avatar3.png" alt="">
-							</div>
-							<div class="client-meta">
-								<h3>Jacob Sikim <span>Local shop owner</span></h3>
-								<p class="testimonial-body">
-									" Sed ut perspiciatis unde omnis iste natus error veritatis et  quasi architecto beatae vitae dict eaque ipsa quae ab illo inventore Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium "
-								</p>
-								<div class="last-icon">
-									<i class="fas fa-quote-right"></i>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div> -->
-	<!-- end testimonail-section -->
 	
 	<!-- advertisement section -->
 	<div class="abt-section mb-150">
@@ -260,7 +203,7 @@
 			<div class="row">
 				<div class="col-lg-6 col-md-12">
 					<div class="abt-text">
-						<p class="top-sub">Since Year 2010</p>
+						<p class="top-sub">Sejak Tahun 2010</p>
 						<h2>Kami adalah <span class="orange-text">Djaman</span></h2>
 						<p>Djaman menjual jamu berupa resep
 							rahasia atau warisan nenek
@@ -291,131 +234,45 @@
 		</div>
 	</div>
 	<!-- end advertisement section -->
+
+	<!-- logo carousel -->
+	<div class="logo-carousel-section">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="section-title text-center">	
+						<h3><span class="orange-text">Partner</span> Kami</h3>
+					</div>
+					<div class="logo-carousel-inner">
+						<div class="single-logo-item">
+							<img src="https://ucarecdn.com/36c7dcbd-cd6c-44d2-8faf-d3e99301ef8d/-/preview/500x500/-/quality/smart_retina/-/format/auto/" alt="Unjani Logo">
+						</div>
+						<div class="single-logo-item">
+							<img src="https://ucarecdn.com/8c2b9e7d-bd30-4504-9034-bed3f8083298/-/preview/500x500/-/quality/smart_retina/-/format/auto/" alt="Kemdikbud Logo">
+						</div>
+						<div class="single-logo-item mt-5">
+							<img src="https://ucarecdn.com/a7b444df-ea8f-42d7-bd75-9860cd821767/-/preview/1000x400/-/format/auto/-/quality/smart_retina/" alt="Kampus Merdeka Logo">
+						</div>
+						<div class="single-logo-item">
+							<img src="https://ucarecdn.com/d8ac98f8-72dd-4b48-8fa2-7ab29f504a69/-/preview/500x500/-/quality/smart_retina/-/format/auto/" alt="Simbelmawa Logo">
+						</div>
+						<div class="single-logo-item">
+							<img src="https://ucarecdn.com/dd886aaf-dcbb-4108-8c44-f3baf7316787/-/preview/500x500/-/quality/smart_retina/-/format/auto/" alt="JKMI Logo">
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- end logo carousel -->
 	
 	<!-- shop banner -->
 	<section class="shop-banner">
     	<div class="container">
-        	<h3>Product sale is on! <br> with big <span class="orange-text">Discount...</span></h3>
-            <div class="sale-percent"><span>Discount! <br> Upto</span><?php echo $produk_terlaris->diskon; ?>% <span>off</span></div>
+        	<h3>Penjualan dengan <span class="orange-text">Diskon Besar </span> <br> sedang berlangsung!   </h3>
+            <div class="sale-percent"><span>Diskon! <br> Sampai</span><?php echo $produk_terlaris->diskon; ?>% </div>
             <a href="<?= base_url()?>index.php/Home/Belanja" class="cart-btn btn-lg">Belanja Sekarang</a>
         </div>
     </section>
 	<!-- end shop banner -->
-
-	<!-- latest news -->
-	<!-- <div class="latest-news pt-150 pb-150">
-		<div class="container">
-
-			<div class="row">
-				<div class="col-lg-8 offset-lg-2 text-center">
-					<div class="section-title">	
-						<h3><span class="orange-text">Our</span> News</h3>
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid, fuga quas itaque eveniet beatae optio.</p>
-					</div>
-				</div>
-			</div>
-
-			<div class="row">
-				<div class="col-lg-4 col-md-6">
-					<div class="single-latest-news">
-						<a href="single-news.html"><div class="latest-news-bg news-bg-1"></div></a>
-						<div class="news-text-box">
-							<h3><a href="single-news.html">You will vainly look for fruit on it in autumn.</a></h3>
-							<p class="blog-meta">
-								<span class="author"><i class="fas fa-user"></i> Admin</span>
-								<span class="date"><i class="fas fa-calendar"></i> 27 December, 2019</span>
-							</p>
-							<p class="excerpt">Vivamus lacus enim, pulvinar vel nulla sed, scelerisque rhoncus nisi. Praesent vitae mattis nunc, egestas viverra eros.</p>
-							<a href="single-news.html" class="read-more-btn">read more <i class="fas fa-angle-right"></i></a>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-4 col-md-6">
-					<div class="single-latest-news">
-						<a href="single-news.html"><div class="latest-news-bg news-bg-2"></div></a>
-						<div class="news-text-box">
-							<h3><a href="single-news.html">A man's worth has its season, like tomato.</a></h3>
-							<p class="blog-meta">
-								<span class="author"><i class="fas fa-user"></i> Admin</span>
-								<span class="date"><i class="fas fa-calendar"></i> 27 December, 2019</span>
-							</p>
-							<p class="excerpt">Vivamus lacus enim, pulvinar vel nulla sed, scelerisque rhoncus nisi. Praesent vitae mattis nunc, egestas viverra eros.</p>
-							<a href="single-news.html" class="read-more-btn">read more <i class="fas fa-angle-right"></i></a>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-4 col-md-6 offset-md-3 offset-lg-0">
-					<div class="single-latest-news">
-						<a href="single-news.html"><div class="latest-news-bg news-bg-3"></div></a>
-						<div class="news-text-box">
-							<h3><a href="single-news.html">Good thoughts bear good fresh juicy fruit.</a></h3>
-							<p class="blog-meta">
-								<span class="author"><i class="fas fa-user"></i> Admin</span>
-								<span class="date"><i class="fas fa-calendar"></i> 27 December, 2019</span>
-							</p>
-							<p class="excerpt">Vivamus lacus enim, pulvinar vel nulla sed, scelerisque rhoncus nisi. Praesent vitae mattis nunc, egestas viverra eros.</p>
-							<a href="single-news.html" class="read-more-btn">read more <i class="fas fa-angle-right"></i></a>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-lg-12 text-center">
-					<a href="news.html" class="boxed-btn">More News</a>
-				</div>
-			</div>
-		</div>
-	</div> -->
-	<!-- end latest news -->
-
-	<!-- logo carousel -->
-	<!-- <div class="logo-carousel-section">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-12">
-					<div class="logo-carousel-inner">
-						<div class="single-logo-item">
-							<img src="assets/img/company-logos/1.png" alt="">
-						</div>
-						<div class="single-logo-item">
-							<img src="assets/img/company-logos/2.png" alt="">
-						</div>
-						<div class="single-logo-item">
-							<img src="assets/img/company-logos/3.png" alt="">
-						</div>
-						<div class="single-logo-item">
-							<img src="assets/img/company-logos/4.png" alt="">
-						</div>
-						<div class="single-logo-item">
-							<img src="assets/img/company-logos/5.png" alt="">
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div> -->
-	<!-- end logo carousel -->
-	
-	<!-- jquery -->
-	<script src="<?= base_url()?>/assets_client/js/jquery-1.11.3.min.js"></script>
-	<!-- bootstrap -->
-	<script src="<?= base_url()?>/assets_client/bootstrap/js/bootstrap.min.js"></script>
-	<!-- count down -->
-	<script src="<?= base_url()?>/assets_client/js/jquery.countdown.js"></script>
-	<!-- isotope -->
-	<script src="<?= base_url()?>/assets_client/js/jquery.isotope-3.0.6.min.js"></script>
-	<!-- waypoints -->
-	<script src="<?= base_url()?>/assets_client/js/waypoints.js"></script>
-	<!-- owl carousel -->
-	<script src="<?= base_url()?>/assets_client/js/owl.carousel.min.js"></script>
-	<!-- magnific popup -->
-	<script src="<?= base_url()?>/assets_client/js/jquery.magnific-popup.min.js"></script>
-	<!-- mean menu -->
-	<script src="<?= base_url()?>/assets_client/js/jquery.meanmenu.min.js"></script>
-	<!-- sticker js -->
-	<script src="<?= base_url()?>/assets_client/js/sticker.js"></script>
-	<!-- main js -->
-	<script src="<?= base_url()?>/assets_client/js/main.js"></script>
-
-</body>
-</html>

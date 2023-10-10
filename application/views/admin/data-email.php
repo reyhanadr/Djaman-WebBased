@@ -6,8 +6,8 @@
               <div class="row0">
                 <!-- Basic Bootstrap Table -->
                 <div class="card">
-                  <h5 class="card-header">Data Kategori Produk</h5>
-                  <div class="card-body">
+                  <h5 class="card-header">Data Email</h5>
+                  <!-- <div class="card-body">
                       <div class="row">
                         <div class="col-12 col-md-8 col-lg-4 order-3 order-md-2">
                           <form action="<?= site_url('produk/searchKategori') ?>" method="GET">
@@ -18,7 +18,7 @@
                           </form>
                         </div>
                       </div>
-                    </div>
+                    </div> -->
                     <!-- Tampilkan pesan alert success -->
                     <?php if ($this->session->flashdata("success")): ?>
                         <div class="row justify-content-center">
@@ -65,53 +65,28 @@
                     );
 
                     $this->table->set_template($template);
-                    $this->table->set_heading('No.', 'Nama Kategori', 'Deskripsi Kategori', 'Aksi');
+                    $this->table->set_heading('No.', 'Email', 'Aksi');
 
-                    foreach ($data_kategori as $item) {
+                    foreach ($data_email as $item) {
                         $no_tampil = '<strong >' . $no++ . '.</strong>';
+                        $tombol_hapus = '
+    
 
-                        $actions_menu = '
-                          <div class="btn-group">
-                              <button type="button" class="btn p-0 " onclick="location.href=\'' . site_url('Produk/editKategoriProduk/' . htmlentities($item->id_kategori)) . '\'">
-                                  <i class="bx bx-edit-alt"></i> Edit
-                              </button>
-                              <button type="button" class="btn p-0 mx-2" onclick="location.href=\'' . site_url('Produk/hapusKategoriProduk/' . htmlentities($item->id_kategori)) . '\'">
-                                  <i class="bx bx-trash"></i> Hapus
-                              </button>
-                          </div>';
-
-                          $dropdown_menu = '
-                          <div class="dropdown">
-                              <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
-                                  <i class="bx bx-dots-vertical-rounded"></i>
-                              </button>
-                              <div class="dropdown-menu">
-
-                                  <a class="dropdown-item" href="' . site_url('Produk/editKategoriProduk/' . htmlentities($item->id_kategori)) . '">
-                                      <i class="bx bx-edit-alt me-1"></i> Edit
-                                  </a>
                                   <button
-                                      class="dropdown-item button"
+                                      class=" button btn"
                                       data-bs-toggle="modal"
-                                      data-bs-target="#modalHapusKategori"
-                                      data-id-kategori="'.htmlentities($item->id_kategori).'"
-                                      data-namakategori="'.htmlentities($item->nama_kategori).'"
-                                      data-hapus-url="'. site_url('Produk/hapusKategoriProduk/' . htmlentities($item->id_kategori)).'"
+                                      data-bs-target="#modalHapusEmail"
+                                      data-email="' . htmlentities($item->email) . '"
                                   >
                                       <i class="bx bx-trash me-1"></i> Hapus
                                   </button>
-                              
+';
 
-                              </div>
-                          </div>';
                     
-                    
-
                         $this->table->add_row(
                           $no_tampil,
-                          $item->nama_kategori,
-                          $item->deskripsi_kategori,
-                          $dropdown_menu
+                          $item->email,
+                          $tombol_hapus
                         );
                     }
 
@@ -121,12 +96,6 @@
                 </div>
                 <!--/ Basic Bootstrap Table -->
               </div>
-              <div class="row">
-                <div class="col-12 col-md-8 col-lg-4 order-3 order-md-2 py-3 mb-4">
-                    <a href="<?= base_url()?>index.php/produk/tambahKategoriProduk">
-                        <button type="button" class="btn btn-primary ">Tambah Kategori</button>
-                    </a>
-                </div>
-              </div>
+
             </div>
             <!-- / Content -->

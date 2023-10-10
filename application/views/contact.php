@@ -42,10 +42,10 @@
             <div class="contact-form">
               <form action="<?php echo site_url('Home/simpanAsknsugest')?>" method="POST" enctype="multipart/form-data">
                 <p>
-                  <input type="text" placeholder="Name" name="nama" id="name" />
+                  <input type="text" placeholder="Nama Lengkap" name="nama" id="name" />
                   <input
                     type="email"
-                    placeholder="Email"
+                    placeholder="Alamat Email"
                     name="email"
                     id="email"
                     required
@@ -54,13 +54,13 @@
                 <p>
                   <input
                     type="tel"
-                    placeholder="Phone"
+                    placeholder="Nomer Telepon"
                     name="phone"
                     id="phone"
                   />
                   <input
                     type="text"
-                    placeholder="Subject"
+                    placeholder="Judul/Subjek Pesan"
                     name="subject"
                     id="subject"
                   />
@@ -71,11 +71,14 @@
                     id="message"
                     cols="30"
                     rows="10"
-                    placeholder="Message"
+                    placeholder="Isi Pesan"
                     required
                   ></textarea>
                 </p>
                 <!-- <input type="hidden" name="token" value="FsWga4&@f6aw" />   -->
+                <p>
+                  <div class="g-recaptcha" data-sitekey="<?= $site_key?>"></div>
+                </p>
                 <p><input type="submit" value="Submit" /></p>
               </form>
             </div>
@@ -89,65 +92,61 @@
                 </p>
               </div>
               <div class="contact-form-box">
-    <h4><i class="far fa-clock"></i> Jam Operasional</h4>
-    <p style="text-transform: uppercase;">
-        <?php
-        $combinedDays = [];
-        $currentDay = null;
-        
-        foreach ($data_jam_operasional as $jam) {
-            if ($currentDay === null) {
-                $currentDay = $jam->hari;
-                $currentBuka = $jam->jam_buka;
-                $currentTutup = $jam->jam_tutup;
-            } elseif ($currentBuka === $jam->jam_buka && $currentTutup === $jam->jam_tutup) {
-                // Gabungkan hari dengan jadwal yang sama
-                $currentDay .= ' - ' . $jam->hari;
-            } else {
-                // Jika lebih dari 2 hari yang sama, tampilkan hanya hari terakhir
-                $days = explode(' - ', $currentDay);
-                if (count($days) > 2) {
-                    $currentDay = reset($days) . ' - ' . end($days);
-                }
+                <h4><i class="far fa-clock"></i> Jam Operasional Toko f</h4>
+                <p style="text-transform: uppercase;">
+                    <?php
+                    $combinedDays = [];
+                    $currentDay = null;
+                    
+                    foreach ($data_jam_operasional as $jam) {
+                        if ($currentDay === null) {
+                            $currentDay = $jam->hari;
+                            $currentBuka = $jam->jam_buka;
+                            $currentTutup = $jam->jam_tutup;
+                        } elseif ($currentBuka === $jam->jam_buka && $currentTutup === $jam->jam_tutup) {
+                            // Gabungkan hari dengan jadwal yang sama
+                            $currentDay .= ' - ' . $jam->hari;
+                        } else {
+                            // Jika lebih dari 2 hari yang sama, tampilkan hanya hari terakhir
+                            $days = explode(' - ', $currentDay);
+                            if (count($days) > 2) {
+                                $currentDay = reset($days) . ' - ' . end($days);
+                            }
 
-                // Tambahkan syarat jika $jam->isbuka == null
-                if ($currentBuka === null) {
-                    $combinedDays[] = $currentDay . ': Tutup';
-                } else {
-                    $combinedDays[] = $currentDay . ': ' . $currentBuka . ' - ' . $currentTutup;
-                }
-                
-                // Reset variabel
-                $currentDay = $jam->hari;
-                $currentBuka = $jam->jam_buka;
-                $currentTutup = $jam->jam_tutup;
-            }
-        }
-        
-        // Tambahkan hari terakhir
-        if ($currentDay !== null) {
-            $days = explode(' - ', $currentDay);
-            if (count($days) > 2) {
-                $currentDay = reset($days) . ' - ' . end($days);
-            }
+                            // Tambahkan syarat jika $jam->isbuka == null
+                            if ($currentBuka === null) {
+                                $combinedDays[] = $currentDay . ': Tutup';
+                            } else {
+                                $combinedDays[] = $currentDay . ': ' . $currentBuka . ' - ' . $currentTutup;
+                            }
+                            
+                            // Reset variabel
+                            $currentDay = $jam->hari;
+                            $currentBuka = $jam->jam_buka;
+                            $currentTutup = $jam->jam_tutup;
+                        }
+                    }
+                    
+                    // Tambahkan hari terakhir
+                    if ($currentDay !== null) {
+                        $days = explode(' - ', $currentDay);
+                        if (count($days) > 2) {
+                            $currentDay = reset($days) . ' - ' . end($days);
+                        }
 
-            // Tambahkan syarat jika $jam->isbuka == null
-            if ($currentBuka === null) {
-                $combinedDays[] = $currentDay . ': Tutup';
-            } else {
-                $combinedDays[] = $currentDay . ': ' . $currentBuka . ' - ' . $currentTutup;
-            }
-        }
-        
-        // Gabungkan jadwal menjadi satu string
-        echo implode('<br />', $combinedDays);
-        ?>
-    </p>
-</div>
-
-
-
-
+                        // Tambahkan syarat jika $jam->isbuka == null
+                        if ($currentBuka === null) {
+                            $combinedDays[] = $currentDay . ': Tutup';
+                        } else {
+                            $combinedDays[] = $currentDay . ': ' . $currentBuka . ' - ' . $currentTutup;
+                        }
+                    }
+                    
+                    // Gabungkan jadwal menjadi satu string
+                    echo implode('<br />', $combinedDays);
+                    ?>
+                </p>
+            </div>
 
               <div class="contact-form-box">
                 <h4><i class="fas fa-address-book"></i> Kontak Kami</h4>
@@ -177,39 +176,7 @@
 
     <!-- google map section -->
     <div class="embed-responsive embed-responsive-21by9">
-      <iframe
-        src="<?php echo $data_kontak[0]->maps; ?>"
-        width="600"
-        height="450"
-        frameborder="0"
-        style="border: 0"
-        allowfullscreen=""
-        class="embed-responsive-item"
-      ></iframe>
+      <?php echo $data_kontak[0]->maps; ?>
     </div>
     <!-- end google map section -->
 
-    <!-- jquery -->
-    <script src="<?= base_url()?>/assets_client/js/jquery-1.11.3.min.js"></script>
-    <!-- bootstrap -->
-    <script src="<?= base_url()?>/assets_client/bootstrap/js/bootstrap.min.js"></script>
-    <!-- count down -->
-    <script src="<?= base_url()?>/assets_client/js/jquery.countdown.js"></script>
-    <!-- isotope -->
-    <script src="<?= base_url()?>/assets_client/js/jquery.isotope-3.0.6.min.js"></script>
-    <!-- waypoints -->
-    <script src="<?= base_url()?>/assets_client/js/waypoints.js"></script>
-    <!-- owl carousel -->
-    <script src="<?= base_url()?>/assets_client/js/owl.carousel.min.js"></script>
-    <!-- magnific popup -->
-    <script src="<?= base_url()?>/assets_client/js/jquery.magnific-popup.min.js"></script>
-    <!-- mean menu -->
-    <script src="<?= base_url()?>/assets_client/js/jquery.meanmenu.min.js"></script>
-    <!-- sticker js -->
-    <script src="<?= base_url()?>/assets_client/js/sticker.js"></script>
-    <!-- form validation js -->
-    <script src="<?= base_url()?>/assets_client/js/form-validate.js"></script>
-    <!-- main js -->
-    <script src="<?= base_url()?>/assets_client/js/main.js"></script>
-  </body>
-</html>

@@ -78,7 +78,7 @@
     	<div class="container">
         	<h3>Product sale is on! <br> with big <span class="orange-text">Discount...</span></h3>
             <div class="sale-percent"><span>Sale! <br> Upto</span><?php echo $produk_terlaris->diskon; ?>% <span>off</span></div>
-            <a href="shop.html" class="cart-btn btn-lg">Belanja Sekarang!</a>
+            <a href="<?php echo base_url()?>index.php/Home/Belanja" class="cart-btn btn-lg">Belanja Sekarang!</a>
         </div>
     </section>
 	<!-- end shop banner -->
@@ -97,7 +97,7 @@
 			<div class="row">
 				<div class="col-lg-4 col-md-6">
 					<div class="single-team-item">
-						<div class="team-bg" style="background-image: url(<?= base_url()?>/assets/img/anggota/<?php echo $data_organisasi[1]->foto; ?>);" ></div>
+						<div class="team-bg" style="background-image: url(<?= base_url()?>assets/img/anggota/<?php echo $data_organisasi[1]->foto; ?>);" ></div>
 						<h4><?php echo $data_organisasi[1]->nama; ?> <span><?php echo $data_organisasi[1]->jabatan; ?></span></h4>
 						<!-- <ul class="social-link-team">
 							<li><a href="#" target="_blank"><i class="fab fa-facebook-f"></i></a></li>
@@ -108,7 +108,7 @@
 				</div>
 				<div class="col-lg-4 col-md-6">
 					<div class="single-team-item">
-						<div class="team-bg" style="background-image: url(<?= base_url()?>/assets/img/anggota/<?php echo $data_organisasi[0]->foto; ?>);">
+						<div class="team-bg" style="background-image: url(<?= base_url()?>assets/img/anggota/<?php echo $data_organisasi[0]->foto; ?>);">
 					</div>
 						<h4><?php echo $data_organisasi[0]->nama; ?> <span><?php echo $data_organisasi[0]->jabatan; ?></span></h4>
 
@@ -116,7 +116,7 @@
 				</div>
 				<div class="col-lg-4 col-md-6 offset-md-3 offset-lg-0">
 					<div class="single-team-item">
-						<div class="team-bg" style="background-image: url(<?= base_url()?>/assets/img/anggota/<?php echo $data_organisasi[2]->foto; ?>);"></div>
+						<div class="team-bg" style="background-image: url(<?= base_url()?>assets/img/anggota/<?php echo $data_organisasi[2]->foto; ?>);"></div>
 						<h4><?php echo $data_organisasi[2]->nama; ?> <span><?php echo $data_organisasi[2]->jabatan; ?></span></h4>
 
 					</div>
@@ -134,15 +134,13 @@
 					<div class="testimonial-sliders">
 						<div class="single-testimonial-slider">
 							<div class="client-avater">
-								<img src="<?= base_url()?>/assets_client/img/avaters/avatar1.webp" alt="">
+								<img src="<?= base_url()?>assets_client/img/avaters/avatar1.webp" alt="fotoPelanggan">
 							</div>
 							<div class="client-meta">
-								<h3>Naomi Jubaedah <span>Pelanggan Lokal</span></h3>
+								<h3>Intan Salsabila <span>Pelanggan Lokal</span></h3>
 								<p class="testimonial-body">
-									"Saya mengalami masalah tidur selama beberapa bulan terakhir dan telah mencoba
-									banyak hal untuk membantu saya tidur lebih nyenyak. Namun setelah mencoba jamu
-									dari produk ini, saya merasa lebih rileks dan mudah tidur. Terima kasih atas produk
-									yang luar biasa ini.”
+									"Cobalah Produk Jamu dari Djaman, yang terbaik! Rasanya segar, alami, dan 
+									bikin sistem pencernaan jadi lebih baik. Jarang sakit perut sejak minum ini!”
 								</p>
 								<div class="last-icon">
 									<i class="fas fa-quote-right"></i>
@@ -151,15 +149,13 @@
 						</div>
 						<div class="single-testimonial-slider">
 							<div class="client-avater">
-								<img src="<?= base_url()?>/assets_client/img/avaters/avatar2.webp" alt="">
+								<img src="<?= base_url()?>assets_client/img/avaters/avatar2.webp" alt="fotoPelanggan">
 							</div>
 							<div class="client-meta">
-								<h3>David Batagor <span>Pelanggan Lokal</span></h3>
+								<h3>Bougenville Atthaya <span>Pelanggan Lokal</span></h3>
 								<p class="testimonial-body">
-									"Saya mengalami masalah tidur selama beberapa bulan terakhir dan telah mencoba
-									banyak hal untuk membantu saya tidur lebih nyenyak. Namun setelah mencoba jamu
-									dari produk ini, saya merasa lebih rileks dan mudah tidur. Terima kasih atas produk
-									yang luar biasa ini.”
+									"Coba Produk Jamu dari Djaman, rasakan keajaibannya! Lebih bertenaga dan 
+									sehat secara keseluruhan dengan produk alami yang menjaga kesehatan Anda.”
 								</p>
 								<div class="last-icon">
 									<i class="fas fa-quote-right"></i>
@@ -168,15 +164,13 @@
 						</div>
 						<div class="single-testimonial-slider">
 							<div class="client-avater">
-								<img src="<?= base_url()?>/assets_client/img/avaters/avatar3.webp" alt="">
+								<img src="<?= base_url()?>assets_client/img/avaters/avatar3.webp" alt="fotoPelanggan">
 							</div>
 							<div class="client-meta">
-								<h3>Jacob Cupu <span>Pelanggan Lokal</span></h3>
+								<h3>Denise Cherrybelle<span>Pelanggan Lokal</span></h3>
 								<p class="testimonial-body">
-									"Saya mengalami masalah tidur selama beberapa bulan terakhir dan telah mencoba
-									banyak hal untuk membantu saya tidur lebih nyenyak. Namun setelah mencoba jamu
-									dari produk ini, saya merasa lebih rileks dan mudah tidur. Terima kasih atas produk
-									yang luar biasa ini.”
+									"Produk Jamu dari Djaman sangat lezat dan memberikan manfaat kesehatan luar biasa. 
+									Rasakan energi dan fokus yang lebih setiap hari, pilihan alami untuk menjaga kesehatan. Terima kasih Djaman!”
 								</p>
 								<div class="last-icon">
 									<i class="fas fa-quote-right"></i>
@@ -191,53 +185,34 @@
 	<!-- end testimonail-section -->
 
 	<!-- logo carousel -->
-	<!-- <div class="logo-carousel-section">
+	<div class="logo-carousel-section">
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-12">
+					<div class="section-title text-center">	
+						<h3><span class="orange-text">Partner</span> Kami</h3>
+					</div>
 					<div class="logo-carousel-inner">
 						<div class="single-logo-item">
-							<img src="assets/img/company-logos/1.png" alt="">
+							<img src="https://ucarecdn.com/36c7dcbd-cd6c-44d2-8faf-d3e99301ef8d/-/preview/500x500/-/quality/smart_retina/-/format/auto/" alt="Unjani Logo">
 						</div>
 						<div class="single-logo-item">
-							<img src="assets/img/company-logos/2.png" alt="">
+							<img src="https://ucarecdn.com/8c2b9e7d-bd30-4504-9034-bed3f8083298/-/preview/500x500/-/quality/smart_retina/-/format/auto/" alt="Kemdikbud Logo">
+						</div>
+						<div class="single-logo-item mt-5">
+							<img src="https://ucarecdn.com/a7b444df-ea8f-42d7-bd75-9860cd821767/-/preview/1000x400/-/format/auto/-/quality/smart_retina/" alt="Kampus Merdeka Logo">
 						</div>
 						<div class="single-logo-item">
-							<img src="assets/img/company-logos/3.png" alt="">
+							<img src="https://ucarecdn.com/d8ac98f8-72dd-4b48-8fa2-7ab29f504a69/-/preview/500x500/-/quality/smart_retina/-/format/auto/" alt="Simbelmawa Logo">
 						</div>
 						<div class="single-logo-item">
-							<img src="assets/img/company-logos/4.png" alt="">
+							<img src="https://ucarecdn.com/dd886aaf-dcbb-4108-8c44-f3baf7316787/-/preview/500x500/-/quality/smart_retina/-/format/auto/" alt="JKMI Logo">
 						</div>
-						<div class="single-logo-item">
-							<img src="assets/img/company-logos/5.png" alt="">
-						</div>
+
 					</div>
 				</div>
 			</div>
 		</div>
-	</div> -->
+	</div>
 	<!-- end logo carousel -->
 	
-	<!-- jquery -->
-	<script src="<?= base_url()?>/assets_client\/js/jquery-1.11.3.min.js"></script>
-	<!-- bootstrap -->
-	<script src="<?= base_url()?>/assets_client\/bootstrap/js/bootstrap.min.js"></script>
-	<!-- count down -->
-	<script src="<?= base_url()?>/assets_client\/js/jquery.countdown.js"></script>
-	<!-- isotope -->
-	<script src="<?= base_url()?>/assets_client\/js/jquery.isotope-3.0.6.min.js"></script>
-	<!-- waypoints -->
-	<script src="<?= base_url()?>/assets_client\/js/waypoints.js"></script>
-	<!-- owl carousel -->
-	<script src="<?= base_url()?>/assets_client\/js/owl.carousel.min.js"></script>
-	<!-- magnific popup -->
-	<script src="<?= base_url()?>/assets_client\/js/jquery.magnific-popup.min.js"></script>
-	<!-- mean menu -->
-	<script src="<?= base_url()?>/assets_client\/js/jquery.meanmenu.min.js"></script>
-	<!-- sticker js -->
-	<script src="<?= base_url()?>/assets_client\/js/sticker.js"></script>
-	<!-- main js -->
-	<script src="<?= base_url()?>/assets_client\/js/main.js"></script>
-
-</body>
-</html>

@@ -19,7 +19,7 @@
 			<div class="row">
 				<div class="col-md-5">
 					<div class="single-product-img">
-						<img src="<?php echo base_url('/assets/img/produk/'.$single_product->foto); ?>" alt="">
+						<img src="<?php echo base_url('assets/img/produk/'.$single_product->foto); ?>" alt="fotoProduk">
 					</div>
 				</div>
 				<div class="col-md-7">
@@ -46,7 +46,22 @@
 						<p>2. <?php echo $single_product->manfaat2; ?></p>
 						<p>3. <?php echo $single_product->manfaat3; ?></p>
 						<div class="single-product-form">
-							<a href="<?php echo $single_product->link_wa; ?>" target="_blank" class="cart-btn"> Beli Sekarang</a>
+							<?php if ($is_diskon && $produk_terlaris->date >= date("Y-m-d")) : ?>
+								<a href="<?php echo $single_product->api_wa . $data_kontak[0]->formated_phone_for_whatsapp . $produk_terlaris->link_wa;?>" target="_blank" class="cart-btn"> 
+									<i class="fa-brands fa-whatsapp"></i>
+									Beli via Whatsapp
+								</a>
+							<?php else : ?>
+								<a href="<?php echo $single_product->api_wa . $data_kontak[0]->formated_phone_for_whatsapp . $single_product->link_wa;?>" target="_blank" class="cart-btn"> 
+									<i class="fa-brands fa-whatsapp"></i>
+									Beli via Whatsapp
+								</a>
+							<?php endif; ?>
+							<?php if ($single_product->link_marketplace):?>
+							<a href="<?php echo $single_product->link_marketplace; ?>" target="_blank" style="background-color:#E6B325" class="cart-btn">
+								<i class="fa-solid fa-shop"></i> Marketplace
+							</a>
+							<?php endif; ?>
 							<p>
 								<a style="color:#4B3414;" target="_blank" href="<?= site_url('Home/search?keyword=' . urlencode($single_product->kategori)) ?>">
 									<strong>Kategori: </strong><?= $single_product->kategori ?>
@@ -79,7 +94,7 @@
 				<div class="col-lg-4 col-md-6 text-center">
 					<div class="single-product-item">
 						<div class="product-image">
-							<a href="<?php echo $produk->id_produk; ?>"><img src="<?= base_url()?>/assets/img/produk/<?php echo $produk->foto; ?>" alt=""></a>
+							<a href="<?php echo $produk->id_produk; ?>"><img src="<?= base_url()?>assets/img/produk/<?php echo $produk->foto; ?>" alt="fotoProduk"></a>
 						</div>
 						<h3><?php echo $produk->nama_jamu; ?></h3>
 						<?php if ($is_diskon_harga == $produk->id_produk ) : ?>
@@ -106,54 +121,3 @@
 	</div>
 	<!-- end more products -->
 
-	<!-- logo carousel -->
-	<div class="logo-carousel-section">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-12">
-					<div class="logo-carousel-inner">
-						<div class="single-logo-item">
-							<img src="<?= base_url()?>/assets_client/img/company-logos/1.png" alt="">
-						</div>
-						<div class="single-logo-item">
-							<img src="<?= base_url()?>/assets_client/img/company-logos/2.png" alt="">
-						</div>
-						<div class="single-logo-item">
-							<img src="<?= base_url()?>/assets_client/img/company-logos/3.png" alt="">
-						</div>
-						<div class="single-logo-item">
-							<img src="<?= base_url()?>/assets_client/img/company-logos/4.png" alt="">
-						</div>
-						<div class="single-logo-item">
-							<img src="<?= base_url()?>/assets_client/img/company-logos/5.png" alt="">
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- end logo carousel -->
-	
-	<!-- jquery -->
-	<script src="<?= base_url()?>/assets_client/js/jquery-1.11.3.min.js"></script>
-	<!-- bootstrap -->
-	<script src="<?= base_url()?>/assets_client/bootstrap/js/bootstrap.min.js"></script>
-	<!-- count down -->
-	<script src="<?= base_url()?>/assets_client/js/jquery.countdown.js"></script>
-	<!-- isotope -->
-	<script src="<?= base_url()?>/assets_client/js/jquery.isotope-3.0.6.min.js"></script>
-	<!-- waypoints -->
-	<script src="<?= base_url()?>/assets_client/js/waypoints.js"></script>
-	<!-- owl carousel -->
-	<script src="<?= base_url()?>/assets_client/js/owl.carousel.min.js"></script>
-	<!-- magnific popup -->
-	<script src="<?= base_url()?>/assets_client/js/jquery.magnific-popup.min.js"></script>
-	<!-- mean menu -->
-	<script src="<?= base_url()?>/assets_client/js/jquery.meanmenu.min.js"></script>
-	<!-- sticker js -->
-	<script src="<?= base_url()?>/assets_client/js/sticker.js"></script>
-	<!-- main js -->
-	<script src="<?= base_url()?>/assets_client/js/main.js"></script>
-
-</body>
-</html>

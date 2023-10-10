@@ -65,7 +65,7 @@
                     );
 
                     $this->table->set_template($template);
-                    $this->table->set_heading('No.', 'Terlaris', 'Foto Produk', 'Nama Produk', 'Satuan', 'Harga', 'Deskripsi', 'Manfaat 1', 'Manfaat 2', 'Manfaat 3', 'Kategori', 'Link Whatsapp Bisnis', 'Aksi');
+                    $this->table->set_heading('No.', 'Terlaris', 'Foto Produk', 'Nama Produk', 'Satuan', 'Harga', 'Deskripsi', 'Manfaat 1', 'Manfaat 2', 'Manfaat 3', 'Kategori', 'Link Whatsapp Bisnis', 'link_marketplace', 'Aksi');
 
                     foreach ($data_produk as $item) {
                         $no_tampil = '<strong >' . $no++ . '.</strong>';
@@ -91,14 +91,22 @@
                                   <a class="dropdown-item" href="' . site_url('Produk/editProduk/' . htmlentities($item->id_produk)) . '">
                                       <i class="bx bx-edit-alt me-1"></i> Edit
                                   </a>
-                                  <a class="dropdown-item" href="' . site_url('Produk/hapus/' . htmlentities($item->id_produk)) . '">
+                                  <button
+                                      class="dropdown-item button"
+                                      data-bs-toggle="modal"
+                                      data-bs-target="#modalHapusProduk"
+                                      data-id-produk="' . htmlentities($item->id_produk) . '"
+                                      data-namaproduk="' . htmlentities($item->nama_jamu) . '"
+                                  >
                                       <i class="bx bx-trash me-1"></i> Hapus
-                                  </a>
+                                  </button>
                                   <a class="dropdown-item" href="' . site_url('Produk/UpdateDataTerlaris/' . htmlentities($item->id_produk)) . '">
                                       <i class="bx bx-star me-1"></i> Jadikan Terlaris
                                   </a>
                               </div>
                           </div>';
+                          $link_marketplace = $item->link_marketplace ? $item->link_marketplace : 'Tidak Ada Link Marketplace';
+
 
                         $this->table->add_row(
                           $no_tampil,
@@ -113,6 +121,7 @@
                           strlen($item->manfaat3) > 30 ? substr(htmlentities($item->manfaat3), 0, 30) . '...' : htmlentities($item->manfaat3),
                           $item->kategori,
                           strlen($item->link_wa) > 5 ? substr(htmlentities($item->link_wa), 0, 30) . '...' : htmlentities($item->link_wa),
+                          strlen($link_marketplace) > 5 ? substr(htmlentities($link_marketplace), 0, 30) . '...' : htmlentities($link_marketplace),
                           $dropdown_menu
                         );
                     }
@@ -132,67 +141,3 @@
               </div>
             </div>
             <!-- / Content -->
-
-            <!-- Footer -->
-            <footer class="content-footer footer bg-footer-theme">
-              <div class="container-xxl d-flex flex-wrap justify-content-between py-2 flex-md-row flex-column">
-                <div class="mb-2 mb-md-0">
-                  ©
-                  <script>
-                    document.write(new Date().getFullYear());
-                  </script>
-                  , made with ❤️ by
-                  <a href="https://reyhanadr.epizy.com" target="_blank" class="footer-link fw-bolder">Reyhanadr</a>
-                </div>
-
-              </div>
-            </footer>
-            <!-- / Footer -->
-
-            <div class="content-backdrop fade"></div>
-          </div>
-          <!-- Content wrapper -->
-        </div>
-        <!-- / Layout page -->
-      </div>
-
-      <!-- Overlay -->
-      <div class="layout-overlay layout-menu-toggle"></div>
-    </div>
-    <!-- / Layout wrapper -->
-
-
-    <!-- Core JS -->
-    <!-- build:js assets/vendor/js/core.js -->
-    <!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script> -->
-    <script src="<?= base_url()?>/assets/vendor/libs/popper/popper.js"></script>
-    <script src="<?= base_url()?>/assets/vendor/js/bootstrap.js"></script>
-    <script src="<?= base_url()?>/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
-
-    <script src="<?= base_url()?>/assets/vendor/js/menu.js"></script>
-    <!-- endbuild -->
-
-    <!-- Vendors JS -->
-    <script src="<?= base_url()?>/assets/vendor/libs/apex-charts/apexcharts.js"></script>
-
-    <!-- Main JS -->
-    <script src="<?= base_url()?>/assets/js/main.js"></script>
-
-    <!-- Page JS -->
-    <script src="<?= base_url()?>/assets/js/dashboards-analytics.js"></script>
-
-    <!-- Place this tag in your head or just before your close body tag. -->
-    <script async defer src="https://buttons.github.io/buttons.js"></script>
-
-    <!-- jQuery & Data Tables-->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
-    <script>
-        $(document).ready(function() {
-            $('#mytable').DataTable();
-        });
-    </script>
-  <script>
-  </script>
-  </body>
-</html>

@@ -84,13 +84,14 @@
                                     <a class="dropdown-item" href="' . site_url('Admin/detailAdmin/' . htmlentities($item->id_admin)) . '">
                                         <i class="bx bxs-user-detail me-1"></i> Detail Admin
                                     </a>
-                                    <a class="dropdown-item" href="' . site_url('Admin/tampilEditAdmin/' . $item->id_admin) . '">
-                                        <i class="bx bx-edit-alt me-1"></i> Edit Admin
-                                    </a>';
+                                    ';
                         
                           // Buat dropdown menu berdasarkan status_aktif
                           if ($item->status_aktif === "Aktif" && $item->nama_role == "Admin") {
                             $dropdown_menu .= '
+                                <a class="dropdown-item" href="' . site_url('Admin/tampilEditAdmin/' . $item->id_admin) . '">
+                                  <i class="bx bx-edit-alt me-1"></i> Edit Admin
+                                </a>
                                 <button class="dropdown-item button" 
                                     data-bs-toggle="modal"
                                     data-bs-target="#modalBlokir"
@@ -107,18 +108,14 @@
                             ';
                           }
 
-
-
-
-
-                        if ($item->status_aktif === "Blokir"){
-                          $status = '<span class="badge rounded-pill bg-danger">Blokir</span>';
-                        }else{
-                          $status = '<span class="badge rounded-pill bg-success">Aktif</span>';
-                        }
+                          if ($item->status_aktif === "Blokir"){
+                            $status = '<span class="badge rounded-pill bg-danger">Blokir</span>';
+                          }else{
+                            $status = '<span class="badge rounded-pill bg-success">Aktif</span>';
+                          }
                         
                     
-                    $dropdown_menu .= '</div></div>';
+                        $dropdown_menu .= '</div></div>';
                     
                     
                         $this->table->add_row(
@@ -154,60 +151,3 @@
               </div>
             </div>
             <!-- / Content -->
-
-            <!-- Footer -->
-            <footer class="content-footer footer bg-footer-theme">
-              <div class="container-xxl d-flex flex-wrap justify-content-between py-2 flex-md-row flex-column">
-                <div class="mb-2 mb-md-0">
-                  ©
-                  <script>
-                    document.write(new Date().getFullYear());
-                  </script>
-                  , made with ❤️ by
-                  <a href="https://reyhanadr.epizy.com" target="_blank" class="footer-link fw-bolder">Reyhanadr</a>
-                </div>
-
-              </div>
-            </footer>
-            <!-- / Footer -->
-
-            <div class="content-backdrop fade"></div>
-          </div>
-          <!-- Content wrapper -->
-        </div>
-        <!-- / Layout page -->
-      </div>
-
-      <!-- Overlay -->
-      <div class="layout-overlay layout-menu-toggle"></div>
-    </div>
-    <!-- / Layout wrapper -->
-
-    <!-- Core JS -->
-    <!-- build:js assets/vendor/js/core.js -->
-    <script src="<?= base_url()?>/assets/vendor/libs/jquery/jquery.js"></script>
-    <script src="<?= base_url()?>/assets/vendor/libs/popper/popper.js"></script>
-    <script src="<?= base_url()?>/assets/vendor/js/bootstrap.js"></script>
-    <script src="<?= base_url()?>/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
-
-    <script src="<?= base_url()?>/assets/vendor/js/menu.js"></script>
-    <!-- endbuild -->
-
-    <!-- Vendors JS -->
-    <script src="<?= base_url()?>/assets/vendor/libs/apex-charts/apexcharts.js"></script>
-
-    <!-- Main JS -->
-    <script src="<?= base_url()?>/assets/js/main.js"></script>
-
-    <!-- Page JS -->
-    <script src="<?= base_url()?>/assets/js/dashboards-analytics.js"></script>
-
-    <!-- Place this tag in your head or just before your close body tag. -->
-    <script async defer src="https://buttons.github.io/buttons.js"></script>
-
-    <!-- Custom JS -->
-    <script>
-
-    </script>
-  </body>
-</html>

@@ -1,10 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <!-- reCaptcha Enterprise Google -->
-    <script src="https://www.google.com/recaptcha/enterprise.js?render=6Lf8M04nAAAAAMpRiYuWw87cLuk1LV1Zl5H4oqFM"></script>
-</head>
-<body>
+
     <!-- footer -->
 	<div class="footer-area">
 		<div class="container">
@@ -46,18 +40,18 @@
 				</div>
 				<div class="col-lg-3 col-md-6">
 					<div class="footer-box subscribe">
-						<h2 class="widget-title">Social Media</h2>
-						<!-- <p>Berlangganan Email untuk mendapatkan info terbaru tentang Djaman!</p>
-						<form action="index.html">
-							<input type="email" placeholder="Email">
+						<h2 class="widget-title">Berlangganan Email</h2>
+						<p>Berlangganan Email untuk mendapatkan info terbaru tentang Djaman!</p>
+						<form action="<?= base_url()?>index.php/Home/kirimEmail" method="POST">
+							<input type="email" name="email" placeholder="Email">
 							<button type="submit"><i class="fas fa-paper-plane"></i></button>
-						</form> -->
+						</form>
 						<div class="social-icons">
-						<ul>
+						<!-- <ul>
 							<li><a href="https://instagram.com/djaman.id" target="_blank"><i class="fab fa-instagram"></i></a></li>
 							<li><a href="https://www.tiktok.com/@djaman.id" target="_blank"><i class="fa-brands fa-tiktok"></i></a></li>
 							<li><a href="https://api.whatsapp.com/send/?phone=6281394494246" target="_blank"><i class="fa-brands fa-whatsapp"></i></a></li>
-						</ul>
+						</ul> -->
 					</div>
 					</div>
 				</div>
@@ -89,16 +83,60 @@
 		</div>
 	</div>
 	<!-- end copyright -->
+
+	<!-- Google Recaptcha v3
+    <script async>
+        grecaptcha.enterprise.ready(async () => {
+            const token = await grecaptcha.enterprise.execute('6Lex9TQoAAAAAOsg03-UxVb7PpKluWliiB_DQd9B', {action: 'homepage'});
+            // IMPORTANT: The 'token' that results from execute is an encrypted response sent by
+            // reCAPTCHA Enterprise to the end user's browser.
+            // This token must be validated by creating an assessment.
+            // See https://cloud.google.com/recaptcha-enterprise/docs/create-assessment
+        });
+    </script> -->
+	<!-- Iconify -->
+	<script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js" async></script>
+
+	<!-- jquery -->
+	<script src="<?= base_url()?>assets_client/js/jquery-1.11.3.min.js"></script>
+	<!-- bootstrap -->
+	<script src="<?= base_url()?>assets_client/bootstrap/js/bootstrap.min.js"></script>
+	<!-- count down -->
+	<script src="<?= base_url()?>assets_client/js/jquery.countdown.js"></script>
+	<!-- isotope -->
+	<script src="<?= base_url()?>assets_client/js/jquery.isotope-3.0.6.min.js"></script>
+	<!-- waypoints -->
+	<script src="<?= base_url()?>assets_client/js/waypoints.js"></script>
+	<!-- owl carousel -->
+	<script src="<?= base_url()?>assets_client/js/owl.carousel.min.js"></script>
+	<!-- magnific popup -->
+	<script src="<?= base_url()?>assets_client/js/jquery.magnific-popup.min.js"></script>
+	<!-- mean menu -->
+	<script src="<?= base_url()?>assets_client/js/jquery.meanmenu.min.js"></script>
+	<!-- sticker js -->
+	<script src="<?= base_url()?>assets_client/js/sticker.js"></script>
+	<!-- main js -->
+	<script src="<?= base_url()?>assets_client/js/main.js"></script>
+
+
+	<!-- Custom JS for Shop -->
 		<script>
-            grecaptcha.enterprise.ready(async () => {
-                const token = await grecaptcha.enterprise.execute('6Lf8M04nAAAAAMpRiYuWw87cLuk1LV1Zl5H4oqFM', {action: 'homepage'});
-                // IMPORTANT: The 'token' that results from execute is an encrypted response sent by
-                // reCAPTCHA Enterprise to the end user's browser.
-                // This token must be validated by creating an assessment.
-                // See https://cloud.google.com/recaptcha-enterprise/docs/create-assessment
-            });
-        </script>
-		<script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+		$(document).ready(function() {
+			// Tangkap elemen kategori yang diklik
+			$('li[data-filter]').click(function() {
+				var deskripsi = $(this).data('deskripsi'); // Ambil deskripsi dari atribut data
+
+				// Periksa apakah elemen yang diklik adalah "All"
+				if ($(this).data('filter') === '*') {
+					$('#kategori-deskripsi').empty(); // Hapus isi deskripsi jika "All" diklik
+				} else {
+					// Tampilkan deskripsi di elemen kategori-deskripsi
+					$('#kategori-deskripsi').html('<p>' + deskripsi + '</p>');
+				}
+			});
+		});
+	</script>
+	
 </body>
 
 </html>

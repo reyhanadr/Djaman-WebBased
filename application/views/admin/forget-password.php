@@ -1,23 +1,10 @@
 <!DOCTYPE html>
-
-<!-- =========================================================
-* Sneat - Bootstrap 5 HTML Admin Template - Pro | v1.0.0
-==============================================================
-
-* Product Page: https://themeselection.com/products/sneat-bootstrap-html-admin-template/
-* Created by: ThemeSelection
-* License: You must have a valid license purchased in order to legally use the theme for your project.
-* Copyright ThemeSelection (https://themeselection.com)
-
-=========================================================
- -->
-<!-- beautify ignore:start -->
 <html
   lang="en"
   class="light-style customizer-hide"
   dir="ltr"
   data-theme="theme-default"
-  data-assets-path="assets/"
+  data-assets-path="../assets/"
   data-template="vertical-menu-template-free"
 >
   <head>
@@ -27,7 +14,7 @@
       content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"
     />
 
-    <title>Login Page - Djaman Admin</title>
+    <title>Forgot Password | Djaman Admin</title>
 
     <meta name="description" content="" />
 
@@ -66,20 +53,16 @@
     <script src="<?= base_url()?>/assets/js/config.js"></script>
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
   </head>
-
-  <body>
-    <!-- Content -->
-
-    <div class="container-xxl">
+<div class="container-xxl">
       <div class="authentication-wrapper authentication-basic container-p-y">
-        <div class="authentication-inner">
-          <!-- Register -->
+        <div class="authentication-inner py-4">
+          <!-- Forgot Password -->
           <div class="card">
             <div class="card-body">
               <!-- Logo -->
               <div class="app-brand justify-content-center">
                 <a href="index.html" class="app-brand-link gap-2">
-                  <span class="app-brand-logo demo">
+                <span class="app-brand-logo demo">
                     <img
                       width="25"
                       viewBox="0 0 25 42"
@@ -91,79 +74,47 @@
                 </a>
               </div>
               <!-- /Logo -->
-              <h4 class="mb-2">Selamat Datang! 👋</h4>
-              <p class="mb-2">Masukan Username dan Password untuk Login</p>
+              <h4 class="mb-2">Lupa Password? 🔒</h4>
+              <p class="mb-4">Masukan Email Untuk Menerima Intruksi Ganti Password</p>
               <?php if ($this->session->userdata("error")): ?>
                 <div class="alert alert-danger alert-dismissible" role="alert">
                   <?php echo $this->session->userdata("error"); ?>
                   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
-              <?php elseif($this->session->userdata("success")): ?>
+              <?php elseif ($this->session->userdata("success")): ?>
                 <div class="alert alert-success alert-dismissible" role="alert">
-                  <?php echo $this->session->userdata("success"); ?>    
+                  <?php echo $this->session->userdata("success"); ?>
                   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
               <?php endif; ?>
 
-              <form id="formAuthentication" class="mb-3" action="<?php echo site_url('Admin/login');?>" method="POST">
+              <form class="mb-3" action="<?php echo site_url('ForgetPassword/gantiPasswordByEmail'); ?>" method="POST">
                 <div class="mb-3">
-                  <label for="email" class="form-label">Username</label>
+                  <label for="email" class="form-label">Email</label>
                   <input
-                    type="text"
+                    type="email"
                     class="form-control"
-                    id="username"
-                    name="username"
-                    placeholder="Enter your username"
+                    id="email"
+                    name="email"
+                    placeholder="Enter your email"
                     autofocus
                   />
                 </div>
-                <div class="mb-3 form-password-toggle">
-                  <div class="d-flex justify-content-between">
-                    <label class="form-label" for="password">Password</label>
-                    <a href="<?=base_url()?>index.php/ForgetPassword">
-                     <small>Lupa Password?</small>
-                    </a>
-                  </div>
-                  <div class="input-group input-group-merge">
-                    <input
-                      type="password"
-                      id="password"
-                      class="form-control"
-                      name="password"
-                      placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
-                      aria-describedby="password"
-                    />
-                    <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
-                  </div>
-                </div>
-                <div class="mb-3">
-                    <!-- Tambahkan reCAPTCHA di sini -->
-                    <div class="g-recaptcha" data-sitekey="<?php echo $site_key; ?>"></div>
-                </div>
-                <div class="mb-3">
-                    <button 
-                        class="btn btn-primary d-grid w-100"
-                        type="submit">
-                        Masuk
-                    </button>
-                </div>
+                <button class="btn btn-primary d-grid w-100">Kirim Link Reset</button>
               </form>
-
-              <!-- <p class="text-center">
-                <span>New on our platform?</span>
-                <a href="auth-register-basic.html">
-                  <span>Create an account</span>
+              <div class="text-center">
+                <a href="<?= base_url()?>index.php/Admin/loginPage" class="d-flex align-items-center justify-content-center">
+                  <i class="bx bx-chevron-left scaleX-n1-rtl bx-sm"></i>
+                  Kembali ke halaman Login
                 </a>
-              </p> -->
+              </div>
             </div>
           </div>
-          <!-- /Register -->
+          <!-- /Forgot Password -->
         </div>
       </div>
     </div>
-
-
-
+    
     <!-- Core JS -->
     <!-- build:js admin/assets/vendor/js/core.js -->
     <script src="<?= base_url()?>/assets/vendor/libs/jquery/jquery.js"></script>

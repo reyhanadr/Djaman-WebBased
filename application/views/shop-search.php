@@ -26,38 +26,39 @@
             </div>
 
 			<div class="row product-lists">
-			<?php if (empty($data_produk)): ?>
-				<div class="col-lg-8 offset-lg-2 text-center">
-					<p>Produk Tidak Ditemukan</p>
-				</div>
-			<?php else: ?>
-				<?php foreach ($data_produk as $row) : ?>
-				<div class="col-lg-4 col-md-6 text-center <?php echo str_replace(' ', '', $row->kategori); ?>">
-					<div class="single-product-item">
-						<div class="product-image">
-							<a href="SingleProduk/<?php echo $row->id_produk; ?>"><img src="<?= base_url()?>/assets/img/produk/<?php echo $row->foto; ?>" alt=""></a>
-						</div>
-						<h3><?php echo $row->nama_jamu; ?></h3>
-						<?php if ($is_diskon == $row->id_produk ) : ?>
-								<p class="product-price">
-									<span class="subtitle-product-price">Per <?php echo $row->satuan; ?></span>
-									<del><?php echo $produk_terlaris->harga_asli; ?></del>
-									<span class="product-price-shop"> <?php echo $produk_terlaris->harga_diskon; ?></span>
-								</p>
-
-							<?php else : ?>
-								<p class="product-price">
-									<span class="subtitle-product-price">Per <?php echo $row->satuan; ?></span>
-									<?php echo $row->harga; ?>
-								</p>
-							<?php endif; ?>
-						<a href="SingleProduk/<?php echo $row->id_produk; ?>" class="cart-btn"> Lihat Detail</a>
+				<?php if (empty($data_produk)): ?>
+					<div class="col-lg-8 offset-lg-2 text-center">
+						<p>Produk Tidak Ditemukan</p>
 					</div>
-				</div>
-				<?php endforeach; ?>
-			<?php endif; ?>
-	
+				<?php else: ?>
+					<?php foreach ($data_produk as $produk) : ?>
+						<div class="col-lg-4 col-md-6 text-center <?php echo str_replace(' ', '', $produk['kategori']); ?>">
+							<div class="single-product-item">
+								<div class="product-image">
+									<a href="SingleProduk/<?php echo $produk['id_produk']; ?>"><img src="<?= base_url() ?>assets/img/produk/<?php echo $produk['foto']; ?>"
+											alt="fotoProduk"></a>
+								</div>
+								<h3><?php echo $produk['nama_jamu']; ?></h3>
+								<?php if ($is_diskon == $produk['id_produk']) : ?>
+									<p class="product-price">
+										<span class="subtitle-product-price">Per <?php echo $produk['satuan']; ?></span>
+										<del><?php echo $produk_terlaris->harga_asli; ?></del>
+										<span class="product-price-shop"> <?php echo $produk_terlaris->harga_diskon; ?></span>
+
+									</p>
+								<?php else : ?>
+									<p class="product-price">
+										<span class="subtitle-product-price">Per <?php echo $produk['satuan']; ?></span>
+										<?php echo $produk['harga']; ?>
+									</p>
+								<?php endif; ?>
+								<a href="SingleProduk/<?php echo $produk['id_produk']; ?>" class="cart-btn"> Lihat Detail</a>
+							</div>
+						</div>
+					<?php endforeach; ?>
+				<?php endif; ?>
 			</div>
+
 
 			<!-- <div class="row">
 				<div class="col-lg-12 text-center">
@@ -76,54 +77,3 @@
 	</div>
 	<!-- end products -->
 
-	<!-- logo carousel -->
-	<!-- <div class="logo-carousel-section">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-12">
-					<div class="logo-carousel-inner">
-						<div class="single-logo-item">
-							<img src="assets/img/company-logos/1.png" alt="">
-						</div>
-						<div class="single-logo-item">
-							<img src="assets/img/company-logos/2.png" alt="">
-						</div>
-						<div class="single-logo-item">
-							<img src="assets/img/company-logos/3.png" alt="">
-						</div>
-						<div class="single-logo-item">
-							<img src="assets/img/company-logos/4.png" alt="">
-						</div>
-						<div class="single-logo-item">
-							<img src="assets/img/company-logos/5.png" alt="">
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div> -->
-	<!-- end logo carousel -->
-	
-	<!-- jquery -->
-	<script src="<?= base_url()?>/assets_client\/js/jquery-1.11.3.min.js"></script>
-	<!-- bootstrap -->
-	<script src="<?= base_url()?>/assets_client\/bootstrap/js/bootstrap.min.js"></script>
-	<!-- count down -->
-	<script src="<?= base_url()?>/assets_client\/js/jquery.countdown.js"></script>
-	<!-- isotope -->
-	<script src="<?= base_url()?>/assets_client\/js/jquery.isotope-3.0.6.min.js"></script>
-	<!-- waypoints -->
-	<script src="<?= base_url()?>/assets_client\/js/waypoints.js"></script>
-	<!-- owl carousel -->
-	<script src="<?= base_url()?>/assets_client\/js/owl.carousel.min.js"></script>
-	<!-- magnific popup -->
-	<script src="<?= base_url()?>/assets_client\/js/jquery.magnific-popup.min.js"></script>
-	<!-- mean menu -->
-	<script src="<?= base_url()?>/assets_client\/js/jquery.meanmenu.min.js"></script>
-	<!-- sticker js -->
-	<script src="<?= base_url()?>/assets_client\/js/sticker.js"></script>
-	<!-- main js -->
-	<script src="<?= base_url()?>/assets_client\/js/main.js"></script>
-
-</body>
-</html>
