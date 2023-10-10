@@ -20,6 +20,12 @@ class UserModel extends CI_Model {
         $this->db->order_by('id_admin', 'asc');
         return $this->db->get()->result();
     }
+    public function isUsernameExist($username) 
+    {
+        $this->db->where('username', $username);
+        $query = $this->db->get('admin'); // Ganti 'nama_tabel_admin' sesuai dengan nama tabel admin Anda
+        return $query->num_rows() > 0;
+    }
     public function getAdminById($id_admin)
     {
         $this->db->select('admin.id_admin, admin.nama, admin.email, admin.username, admin.password, admin.foto, roles.role_id, roles.nama_role, admin.status_aktif');
@@ -87,9 +93,13 @@ class UserModel extends CI_Model {
     public function updateLink($id_link, $data)
     {
         $this->db->where('id_link', $id_link);
-        $this->db->update('link_embed', $data);
+        if ($this->db->update('link_embed', $data)) {
+            return true; // Jika pembaruan berhasil
+        } else {
+            return false; // Jika ada kesalahan dalam pembaruan
+        }
     }
-
+    
     // Terkait Aktivitas Blokir / ktif
     public function blokirAdmin($id_admin) {
         $data = array(
@@ -110,7 +120,7 @@ class UserModel extends CI_Model {
     }
 
     public function searchAdmin($keyword){
-        $this->db->select('admin.id_admin, admin.nama, admin.email, admin.username, admin.foto, roles.nama_role');
+        $this->db->select('admin.id_admin, admin.nama, admin.email, admin.username, admin.foto, admin.status_aktif, roles.nama_role');
         $this->db->from('admin');
         $this->db->join('roles', 'roles.role_id = admin.role_id');
         $this->db->like('admin.id_admin', $keyword);

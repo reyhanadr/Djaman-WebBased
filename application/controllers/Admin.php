@@ -12,6 +12,7 @@
             $this->load->model('KontakModel');
             $this->load->library('session');
             $this->load->library('table');
+            
         }
         public function index(){
             if (!$this->session->userdata('logged_in')) {
@@ -25,9 +26,10 @@
             foreach ($data['data_produk'] as &$produk) {
                 $produk->harga = 'Rp. ' . number_format($produk->harga, 0, ',', '.');
             }
-            $this->load->view("admin/header", $data);
+            $this->load->view("admin/template/header", $data);
             $this->load->view("admin/dashboard", $data);
-            $this->load->view("admin/sidebar", $data);
+            $this->load->view("admin/template/sidebar", $data);
+            $this->load->view("admin/template/footer", $data);
 
 
         }
@@ -41,10 +43,12 @@
             }
             $data['active_menu'] = 'data_admin';
             $data['data_admin']= $this->UserModel->getAdmin();
-            $this->load->view("admin/header", $data);
+            $this->load->view("admin/template/header", $data);
             $this->load->view("admin/data-admin", $data);
+            $this->load->view("admin/template/sidebar", $data);
+            $this->load->view("admin/template/footer", $data);
             $this->load->view("admin/modal/modal-blokir", $data);
-            $this->load->view("admin/sidebar", $data);
+
         }
 
         public function detailAdmin($id_admin){
@@ -56,10 +60,12 @@
             $data['active_menu'] = 'data_admin';
             $data['detail_admin']= $this->UserModel->getAdminById($id_admin);
 
-            $this->load->view("admin/header", $data);
-            $this->load->view("admin/detail-admin", $data);
+            $this->load->view("admin/template/header", $data);
+            $this->load->view("admin/detail/detail-admin", $data);
+            $this->load->view("admin/template/sidebar", $data);
+            $this->load->view("admin/template/footer", $data);
             $this->load->view("admin/modal/modal-blokir", $data);
-            $this->load->view("admin/sidebar", $data);
+
         }
 
         public function tampilEditAdmin($id_admin){
@@ -68,50 +74,118 @@
             }else if ($this->session->userdata('role_id') == 2){
                 redirect('Admin/errorPage');
             }
+            $this->output->set_header('Cache-Control: no-store, no-cache, must-revalidate, post-check=0, pre-check=0');
+
             $data['active_menu'] = 'data_admin';
             $data['data_admin']= $this->UserModel->getAdminById($id_admin);
             $data['data_roles']= $this->UserModel->getRoles();
 
 
-            $this->load->view("admin/header", $data);
-            $this->load->view("admin/edit-admin", $data);
-            $this->load->view("admin/sidebar", $data);
+            $this->load->view("admin/template/header", $data);
+            $this->load->view("admin/edit/edit-admin", $data);
+            $this->load->view("admin/template/sidebar", $data);
+            $this->load->view("admin/template/footer", $data);
         }
 
         public function updateDataAdmin($id_admin) {
             if (!$this->session->userdata('logged_in')) {
                 redirect('Admin/loginPage');
-            }else if ($this->session->userdata('role_id') == 2){
+            } else if ($this->session->userdata('role_id') == 2){
                 redirect('Admin/errorPage');
             }
+            $this->output->set_header('Cache-Control: no-store, no-cache, must-revalidate, post-check=0, pre-check=0');
+
             $id_admin = $this->input->post('id_admin');
             $nama = $this->input->post('nama');
             $email = $this->input->post('email');
             $username = $this->input->post('username');
             $password = $this->input->post('password');
             $role_id = $this->input->post('role_id');
+            
+            // Mengambil data pengguna berdasarkan ID
+            $existingUser = $this->UserModel->getAdminById($id_admin);
         
+            // Memeriksa apakah username baru yang dimasukkan telah digunakan oleh pengguna lain
+            if ($username !== $existingUser->username && $this->UserModel->isUsernameExist($username)) {
+                $id_admin_exist = $this->UserModel->getAdminByUsername($username); // Mengambil ID admin yang memiliki username yang sama
+                $this->session->set_flashdata('error', 'Username sudah digunakan oleh <a target="_blank" href="' . base_url('index.php/Admin/detailAdmin/' . $id_admin_exist->id_admin) . '">' . $id_admin_exist->nama . ' <iconify-icon icon="fluent-mdl2:open-in-new-tab"></iconify-icon></a>');
+
+                redirect('Admin/tampilEditAdmin/' . $id_admin);
+            }
+
+
             // Memeriksa apakah ada file foto yang diupload
             if ($_FILES['foto']['name']) {
                 $config['upload_path'] = 'assets/img/admin'; // Lokasi penyimpanan foto
-                $config['allowed_types'] = 'jpg|jpeg|png';
-                $config['max_size'] = 2048; // Batasan ukuran file (dalam KB)
+                $config['allowed_types'] = 'jpg|jpeg|png|webp';
+                $config['max_size'] = 10240; // Batasan ukuran file (dalam KB)
+                $config['file_name'] = $username . '_Avatar_' . "updatedat_" . time(); // Nama file diubah sesuai nama yang diinputkan
         
                 $this->load->library('upload', $config);
         
                 if ($this->upload->do_upload('foto')) {
+                    // Logika Hapus Foto Sebelum Di Edit
+                    $existing_profile = $this->ProfileModel->getProfileById($id_admin);
+                    $existing_foto = $existing_profile->foto;
+                    if ($existing_foto && $existing_foto !== 'default.jpg'){
+                         // Hapus foto sebelumnya
+                         $existing_foto_path = 'assets/img/admin/' . $existing_foto;
+                        if (file_exists($existing_foto_path)) {
+                            unlink($existing_foto_path);
+                        }
+                    }
                     $uploaded_data = $this->upload->data();
                     $foto = $uploaded_data['file_name'];
         
-                    // Mengupdate data produk beserta foto
-                    $data = array(
-                        'id_admin' => $id_admin,
-                        'nama' => $nama,
-                        'email' => $email,
-                        'username' => $username,
-                        'foto' => $foto,
-                        'role_id' => $role_id
-                    );
+                    // Memeriksa apakah file adalah WebP
+                    $file_extension = pathinfo($foto, PATHINFO_EXTENSION);
+                    if ($file_extension === 'webp') {
+                        // Jika file adalah WebP, maka tidak perlu konversi
+                        $data = array(
+                            'nama' => $nama,
+                            'email' => $email,
+                            'username' => $username,
+                            'foto' => $foto
+                        );
+                    } else {
+                        // Konversi gambar ke WebP
+                        list($width, $height) = getimagesize($config['upload_path'] . '/' . $foto);
+                        $new_width = $width;
+                        $new_height = $height;
+        
+                        $image_p = imagecreatetruecolor($new_width, $new_height);
+        
+                        switch (exif_imagetype($config['upload_path'] . '/' . $foto)) {
+                            case IMAGETYPE_JPEG:
+                                $image = imagecreatefromjpeg($config['upload_path'] . '/' . $foto);
+                                break;
+                            case IMAGETYPE_PNG:
+                                $image = imagecreatefrompng($config['upload_path'] . '/' . $foto);
+                                break;
+                            default:
+                                $image = false;
+                                break;
+                        }
+        
+                        if ($image) {
+                            imagecopyresampled($image_p, $image, 0, 0, 0, 0, $new_width, $new_height, $width, $height);
+                            $webp_file_path = 'assets/img/admin/' . pathinfo($foto, PATHINFO_FILENAME) . '.webp';
+                            imagewebp($image_p, $webp_file_path, 80); // 80 adalah kualitas gambar, sesuaikan sesuai kebutuhan
+                            imagedestroy($image_p);
+                            imagedestroy($image);
+        
+                            // Hapus foto asli
+                            unlink($config['upload_path'] . '/' . $foto);
+        
+                            // Update data profil dengan nama file WebP yang baru
+                            $data = array(
+                                'nama' => $nama,
+                                'email' => $email,
+                                'username' => $username,
+                                'foto' => pathinfo($foto, PATHINFO_FILENAME) . '.webp'
+                            );
+                        }
+                    }
         
                     // Memeriksa apakah password diisi atau tidak
                     if (!empty($password)) {
@@ -119,17 +193,23 @@
                     }
         
                     $this->UserModel->updateAdmin($id_admin, $data);
-                    $this->session->set_flashdata('success', 'Data Admin berhasil diperbarui');
-        
-                    // Mengambil data admin terbaru dari database
+                    $this->session->set_flashdata('success', 'Profile berhasil diperbarui');
                 } else {
-                    $error = $this->upload->display_errors();
-                    $this->session->set_flashdata('error', $error);
+                    // Handle pesan kesalahan berdasarkan jenis kesalahan
+                    $upload_error = $this->upload->display_errors();
+
+                    if (strpos($upload_error, 'The filetype you are attempting to upload is not allowed') !== false) {
+                        $this->session->set_flashdata('error', 'Jenis file yang diunggah tidak diperbolehkan. Harap unggah file gambar (JPG, JPEG, PNG dan WEBP).');
+                    } elseif (strpos($upload_error, 'The file you are attempting to upload is larger than the permitted size.') !== false) {
+                        $this->session->set_flashdata('error', 'Ukuran file yang diunggah melebihi batas maksimum yang diperbolehkan (10 MB).');
+                    } else {
+                        $this->session->set_flashdata('error', $upload_error);
+                    }
                     redirect('Admin/tampilEditAdmin/' . $id_admin);
-                    $this->session->set_flashdata('failed', 'Data Admin gagal diperbarui');
+
                 }
             } else {
-                // Jika tidak ada foto yang diupload, hanya mengupdate data produk tanpa foto
+                // Jika tidak ada foto yang diupload, hanya mengupdate data admin tanpa foto
                 $data = array(
                     'id_admin' => $id_admin,
                     'nama' => $nama,
@@ -145,7 +225,6 @@
         
                 $this->UserModel->updateAdmin($id_admin, $data);
                 $this->session->set_flashdata('success', 'Data Admin berhasil diperbarui');
-        
             }
         
             // Mengatur kembali session data admin
@@ -154,6 +233,7 @@
             }
             redirect('Admin/tampilDataAdmin');
         }
+        
 
         private function incrementAdminId($lastAdminID){
             // Ambil angka dari ID Admin terakhir
@@ -191,17 +271,19 @@
             $data['data_roles']= $this->UserModel->getRolesAdmin();
         
             // Load view form dan kirim data ke view
-            $this->load->view("admin/header", $data);
-            $this->load->view('admin/input-admin', $data);
-            $this->load->view("admin/sidebar", $data);
+            $this->load->view("admin/template/header", $data);
+            $this->load->view('admin/input/input-admin', $data);
+            $this->load->view("admin/template/sidebar", $data);
+            $this->load->view("admin/template/footer", $data);
         }
 
-        public function simpanAdmin(){
+        public function simpanAdmin() {
             if (!$this->session->userdata('logged_in')) {
                 redirect('Admin/loginPage');
-            }else if ($this->session->userdata('role_id') == 2){
+            } else if ($this->session->userdata('role_id') == 2) {
                 redirect('Admin/errorPage');
             }
+        
             // Mendapatkan data input dari form
             $id_admin = $this->input->post('id_admin');
             $nama = $this->input->post('nama');
@@ -209,36 +291,105 @@
             $username = $this->input->post('username');
             $password = $this->input->post('password');
             $role_id = $this->input->post('role_id');
-            // $foto = $this->input->post('foto');
-
+        
+            // Memeriksa apakah username sudah digunakan
+            if ($this->UserModel->isUsernameExist($username)) {
+                $id_admin_exist = $this->UserModel->getAdminByUsername($username); // Mengambil ID admin yang memiliki username yang sama
+                $this->session->set_flashdata('error', 'Username sudah digunakan Oleh: <a target="_blank" href="' . base_url('index.php/Admin/detailAdmin/' . $id_admin_exist->id_admin) . '">'.$id_admin_exist->nama.'<iconify-icon icon="fluent-mdl2:open-in-new-tab"></iconify-icon></a>');
+                redirect('Admin/tampilDataAdmin');
+            }
+        
             // Upload foto ke folder
             $config['upload_path'] = 'assets/img/admin';
-            $config['allowed_types'] = 'jpg|jpeg|png';
-            $config['max_size'] = 2048;
-            $config['file_name'] = $nama;
-     
+            $config['allowed_types'] = 'jpg|jpeg|png|webp';
+            $config['max_size'] = 5125;
+            $config['file_name'] = $username . '_Avatar';
+        
             $this->load->library('upload', $config);
-             // Menampilkan pesan error dikarenakan tidak terdapat foto
+        
             if (!$this->upload->do_upload('foto')) {
-            //  $error = $this->upload->display_errors();
-             $this->session->set_flashdata('error', "Masukan Foto Admin untuk Menambah ADmin");
-             redirect('Admin/inputDataAdmin');
-             }else {     
-                 $data = array(
-                     'id_admin' => $id_admin,
-                     'nama' => $nama,
-                     'email' => $email,
-                     'username' => $username,
-                     'password' => md5($password),
-                     'role_id' => $role_id,
-                     'foto' => $this->upload->data('file_name'),
-                 );
-     
-                 $this->UserModel->simpanDataAdmin($data);
-                 $this->session->set_flashdata('success', 'Data Admin berhasil disimpan.');
-                 redirect('Admin/tampilDataAdmin');
-             }
+                $data = array(
+                    'id_admin' => $id_admin,
+                    'nama' => $nama,
+                    'email' => $email,
+                    'username' => $username,
+                    'password' => md5($password),
+                    'role_id' => $role_id,
+                    'foto' => "admin.webp",
+                    'status_aktif' => "Aktif"
+                );
+                $this->UserModel->simpanDataAdmin($data);
+                $this->session->set_flashdata('success', 'Data Admin berhasil disimpan dengan Foto Default.');
+            } else {
+                // Mendapatkan path file yang diunggah
+                $file_path = $this->upload->data('full_path');
+        
+                // Periksa ekstensi file
+                $file_extension = pathinfo($file_path, PATHINFO_EXTENSION);
+        
+                if ($file_extension !== 'webp') {
+                    // Mengompresi gambar dengan GD
+                    list($width, $height) = getimagesize($file_path);
+                    $new_width = $width;
+                    $new_height = $height;
+        
+                    $image_p = imagecreatetruecolor($new_width, $new_height);
+        
+                    switch (exif_imagetype($file_path)) {
+                        case IMAGETYPE_JPEG:
+                            $image = imagecreatefromjpeg($file_path);
+                            break;
+                        case IMAGETYPE_PNG:
+                            $image = imagecreatefrompng($file_path);
+                            break;
+                        default:
+                            $image = false;
+                            break;
+                    }
+        
+                    if ($image) {
+                        imagecopyresampled($image_p, $image, 0, 0, 0, 0, $new_width, $new_height, $width, $height);
+                        $webp_file_path = 'assets/img/admin/' . $nama . '.webp';
+                        imagewebp($image_p, $webp_file_path, 80); // 80 adalah kualitas gambar, sesuaikan sesuai kebutuhan
+                        imagedestroy($image_p);
+                        imagedestroy($image);
+        
+                        // Hapus foto asli
+                        unlink($file_path);
+        
+                        $data = array(
+                            'id_admin' => $id_admin,
+                            'nama' => $nama,
+                            'email' => $email,
+                            'username' => $username,
+                            'password' => md5($password),
+                            'role_id' => $role_id,
+                            'foto' => $nama . '.webp',
+                            'status_aktif' => "Aktif"
+                        );
+                        $this->UserModel->simpanDataAdmin($data);
+                        $this->session->set_flashdata('success', 'Data Admin berhasil disimpan.');
+                    }
+                } else {
+                    // Jika file sudah dalam format .webp, tidak perlu dikompresi ulang
+                    $data = array(
+                        'id_admin' => $id_admin,
+                        'nama' => $nama,
+                        'email' => $email,
+                        'username' => $username,
+                        'password' => md5($password),
+                        'role_id' => $role_id,
+                        'foto' => $nama . '.webp',
+                        'status_aktif' => "Aktif"
+                    );
+                    $this->UserModel->simpanDataAdmin($data);
+                    $this->session->set_flashdata('success', 'Data Admin berhasil disimpan.');
+                }
+            }
+            redirect('Admin/tampilDataAdmin');
         }
+        
+        
         
         public function searchAdmin(){
             if (!$this->session->userdata('logged_in')) {
@@ -251,9 +402,10 @@
             $data['data_admin'] = $this->UserModel->searchAdmin($keyword);
 
             // Tampilkan tampilan (view) dengan hasil pencarian
-            $this->load->view("admin/header", $data);
+            $this->load->view("admin/template/header", $data);
             $this->load->view("admin/data-admin", $data);
-            $this->load->view("admin/sidebar", $data);
+            $this->load->view("admin/template/sidebar", $data);
+            $this->load->view("admin/template/footer", $data);
 
         }
 
@@ -267,9 +419,10 @@
             $data['active_menu'] = 'jam_operasional';
             $data['data_jam_operasional'] = $this->KontakModel->getJamOperasional();
             // Tampilkan tampilan (view) dengan hasil pencarian
-            $this->load->view("admin/header", $data);
+            $this->load->view("admin/template/header", $data);
             $this->load->view("admin/data-jamoperasional", $data);
-            $this->load->view("admin/sidebar", $data);
+            $this->load->view("admin/template/sidebar", $data);
+            $this->load->view("admin/template/footer", $data);
         }
         public function tampilEditJamOperasional($id_jamoperasional){
             if (!$this->session->userdata('logged_in')) {
@@ -280,9 +433,10 @@
             $data['active_menu'] = 'jam_operasional';
             $data['data_jam_operasional'] = $this->KontakModel->getJamOperasional();
             // Tampilkan tampilan (view) dengan hasil pencarian
-            $this->load->view("admin/header", $data);
+            $this->load->view("admin/template/header", $data);
             $this->load->view("admin/data-jamoperasional", $data);
-            $this->load->view("admin/sidebar", $data);
+            $this->load->view("admin/template/sidebar", $data);
+            $this->load->view("admin/template/footer", $data);
         }
         public function editJamOperasional($id_jamoperasional){
             if (!$this->session->userdata('logged_in')) {
@@ -293,9 +447,10 @@
             $data['active_menu'] = 'jam_operasional';
             $data['data_jam_operasional'] = $this->KontakModel->getJamOperasionalById($id_jamoperasional);
             // Tampilkan tampilan (view) dengan hasil pencarian
-            $this->load->view("admin/header", $data);
-            $this->load->view("admin/edit-jamoperasional", $data);
-            $this->load->view("admin/sidebar", $data);
+            $this->load->view("admin/template/header", $data);
+            $this->load->view("admin/edit/edit-jamoperasional", $data);
+            $this->load->view("admin/template/sidebar", $data);
+            $this->load->view("admin/template/footer", $data);
         }
         public function updateJamOperasional($id_jamoperasional){
             if (!$this->session->userdata('logged_in')) {
@@ -369,14 +524,15 @@
                 redirect('Admin/loginPage');
             }
             $data['active_menu'] = 'dashboard';
-            $this->load->view("admin/header", $data);
+            $this->load->view("admin/template/header", $data);
             $this->load->view("admin/dashboard");
-            $this->load->view("admin/sidebar", $data);
+            $this->load->view("admin/template/sidebar", $data);
+            $this->load->view("admin/template/footer", $data);
         }
         
         
         public function loginPage(){
-            $site_key = '6Lcn-k4nAAAAAMAzpS5yXU7GEAb3kVjfs6345Wcx'; // Ganti dengan Site Key Anda dari reCAPTCHA
+            $site_key = '6LcuADUoAAAAAAGZpb1eTWPx0GEi4NBt40e-UZqS'; // Ganti dengan Site Key Anda dari reCAPTCHAA
             $data['site_key'] = $site_key;
             $this->load->view("admin/login", $data);
         }
@@ -436,9 +592,10 @@
             }
             $data['active_menu'] = 'data_linkEmbed';
             $data['detail_link']= $this->UserModel->getLinkEmbed();
-            $this->load->view("admin/header", $data);
-            $this->load->view("admin/detail-linkembed", $data);
-            $this->load->view("admin/sidebar", $data);
+            $this->load->view("admin/template/header", $data);
+            $this->load->view("admin/detail/detail-linkembed", $data);
+            $this->load->view("admin/template/sidebar", $data);
+            $this->load->view("admin/template/footer", $data);
         }
 
         public function editLink($id_link){
@@ -467,8 +624,12 @@
             $data = array(
                      'link' => $default_link->link_default,
                     );
-            $this->UserModel->updateLink($id_link, $data);
-            $this->session->set_flashdata("success", "Data Link Berhasil Diperbarui");
+            if ($this->UserModel->updateLink($id_link, $data)) {
+                $this->session->set_flashdata("successReset", "Data Link Berhasil Di reset");
+            } else {
+                $this->session->set_flashdata("error", "Data Link Gagal Di reset");
+            }
+
 
             redirect('Admin/tampilLinkEmbed'); 
         }
@@ -487,36 +648,41 @@
             if (!empty($data['data_produk'])) {
                 // Jika ditemukan data organisasi, arahkan ke view data-produk
                 $data['active_menu'] = 'data_produk';
-                $this->load->view("admin/header", $data);
+                $this->load->view("admin/template/header", $data);
                 $this->load->view("admin/data-produk", $data);
-                $this->load->view("admin/sidebar", $data);
+                $this->load->view("admin/template/sidebar", $data);
+                $this->load->view("admin/template/footer", $data);
 
             }else if(!empty($data['data_organisasi'])){
                 // Jika tidak ditemukan data organisasi, arahkan ke view data-organisasi
                 $data['active_menu'] = 'data_organisasi';
-                $this->load->view("admin/header", $data);
+                $this->load->view("admin/template/header", $data);
                 $this->load->view("admin/data-organisasi", $data);
-                $this->load->view("admin/sidebar", $data);
+                $this->load->view("admin/template/sidebar", $data);
+                $this->load->view("admin/template/footer", $data);
 
             }else if(!empty($data['data_kontak'])){
                 // Jika tidak ditemukan data organisasi, arahkan ke view data-organisasi
                 $data['active_menu'] = 'data_kontak';
-                $this->load->view("admin/header", $data);
+                $this->load->view("admin/template/header", $data);
                 $this->load->view("admin/data-kontak", $data);
-                $this->load->view("admin/sidebar", $data);
+                $this->load->view("admin/template/sidebar", $data);
+                $this->load->view("admin/template/footer", $data);
 
             }else if(!empty($data['asknsugest'])){
                 // Jika tidak ditemukan data organisasi, arahkan ke view data-organisasi
                 $data['active_menu'] = 'asknsugest';
-                $this->load->view("admin/header", $data);
+                $this->load->view("admin/template/header", $data);
                 $this->load->view("admin/asknsugest", $data);
-                $this->load->view("admin/sidebar", $data);
+                $this->load->view("admin/template/sidebar", $data);
+                $this->load->view("admin/template/footer", $data);
             }else if(!empty($data['data_admin']) && $this->session->userdata('role_id') == 1) {
                 // Kode yang akan dijalankan jika kondisi terpenuhi
-                $data['active_menu'] = 'asknsugest';
-                $this->load->view("admin/header", $data);
+                $data['active_menu'] = 'data_admin';
+                $this->load->view("admin/template/header", $data);
                 $this->load->view("admin/data-admin", $data);
-                $this->load->view("admin/sidebar", $data);
+                $this->load->view("admin/template/sidebar", $data);
+                $this->load->view("admin/template/footer", $data);
             } else {
                 redirect('Admin/ErrorPage');
             }
