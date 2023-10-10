@@ -7,7 +7,7 @@
                 <div class="col-lg-4">
                   <div class="card mb-3">
                     <div class="card-body d-flex justify-content-center align-items-center">
-                      <img
+                      <img style="max-width: 100%; height: auto; width: 200px;"
                         src="<?= base_url() ?>/assets/img/produk/<?= htmlentities($data_produk->foto) ?>"
                         alt="user-avatar"
                         class="d-block rounded"
@@ -83,13 +83,36 @@
                         <div class="mb-3 col-md-12">
                           <h5 for="firstName" class="mb-2">Link Wa</h5>
                           <td class="py-2">
-                            <a target="_blank" href="<?php echo $data_produk->link_wa?>">
+                            <a target="_blank" href="<?php echo $data_produk->api_wa . $data_kontak[0]->phone . $data_produk->link_wa?>">
                               ...
-                              <?= substr($data_produk->link_wa, 149, 60) // Ini akan memotong link WhatsApp menjadi 10 karakter pertama ?>
+                              <?php echo substr($data_produk->api_wa . $data_kontak[0]->phone . $data_produk->link_wa, 149, 60)?>
+
                               ...
                             </a>
                           </td>
                         </div>
+
+							          <?php if ($data_produk->link_marketplace):?>
+                          <div class="mb-3 col-md-12">
+                            <h5 for="firstName" class="mb-2">Link Marketplace</h5>
+                            <td class="py-2">
+                              <a target="_blank" href="<?php echo $data_produk->link_marketplace?>">
+                                ...
+                                <?= substr($data_produk->link_marketplace, 0, 60) // Ini akan memotong link WhatsApp menjadi 10 karakter pertama ?>
+                                ...
+                              </a>
+                            </td>
+                          </div>
+							          <?php else:?>
+                          <div class="mb-3 col-md-12">
+                            <h5 for="firstName" class="mb-2">Link Marketplace</h5>
+                            <td class="py-2">
+                              <a>
+                                Tidak Ada Link Marketplace
+                              </a>
+                            </td>
+                          </div>
+							          <?php endif;?>
 
                         <div class="mb-3 col-md-6">
                           <h5 for="firstName" class="mb-2">Dibuat Oleh:</h5>
@@ -130,9 +153,19 @@
 
                         
                         <div class="row">
-                          <div class="mt-2">
-                              <a href="<?= base_url()?>index.php/Produk/editProduk/<?=  $data_produk->id_produk?>" class="btn btn-primary">Edit Produk</a>
-                              <a href="<?= base_url()?>index.php/Produk/tampilDataProduk" class="btn btn-outline-primary">Kembali</a>
+                          <div class="col-md-6 mt-2">
+                            <a href="<?= base_url()?>index.php/Produk/tampilDataProduk" class="btn btn-icon btn-outline-primary">
+                              <span class="tf-icons bx bx-left-arrow-alt"></span>
+                            </a>
+                            <a href="<?= base_url()?>index.php/Produk/editProduk/<?=  $data_produk->id_produk?>" class="btn btn-primary">Edit </a>
+                                <button
+                                      class="button btn btn-danger"
+                                      data-bs-toggle="modal"
+                                      data-bs-target="#modalHapusProduk"
+                                      data-id-produk="<?=  $data_produk->id_produk?>"
+                                      data-namaproduk="<?=  $data_produk->nama_jamu?>"
+                                > Hapus 
+                              </button>
                           </div>
                         </div>
 
@@ -146,58 +179,3 @@
           </div>
 
             <!-- / Content -->
-
-            <!-- Footer -->
-            <footer class="content-footer footer bg-footer-theme">
-              <div class="container-xxl d-flex flex-wrap justify-content-between py-2 flex-md-row flex-column">
-                <div class="mb-2 mb-md-0">
-                  ©
-                  <script>
-                    document.write(new Date().getFullYear());
-                  </script>
-                  , made with ❤️ by
-                  <a href="https://reyhanadr.epizy.com" target="_blank" class="footer-link fw-bolder">Reyhanadr</a>
-                </div>
-
-              </div>
-            </footer>
-            <!-- / Footer -->
-
-            <div class="content-backdrop fade"></div>
-          </div>
-          <!-- Content wrapper -->
-        </div>
-        <!-- / Layout page -->
-      </div>
-
-      <!-- Overlay -->
-      <div class="layout-overlay layout-menu-toggle"></div>
-    </div>
-    <!-- / Layout wrapper -->
-
-
-    <!-- Core JS -->
-    <!-- build:js assets/vendor/js/core.js -->
-    <script src="<?= base_url()?>/assets/vendor/libs/jquery/jquery.js"></script>
-    <script src="<?= base_url()?>/assets/vendor/libs/popper/popper.js"></script>
-    <script src="<?= base_url()?>/assets/vendor/js/bootstrap.js"></script>
-    <script src="<?= base_url()?>/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
-
-    <script src="<?= base_url()?>/assets/vendor/js/menu.js"></script>
-    <!-- endbuild -->
-
-    <!-- Vendors JS -->
-    <script src="<?= base_url()?>/assets/vendor/libs/apex-charts/apexcharts.js"></script>
-
-    <!-- Main JS -->
-    <script src="<?= base_url()?>/assets/js/main.js"></script>
-
-    <!-- Page JS -->
-    <script src="<?= base_url()?>/assets/js/dashboards-analytics.js"></script>
-    <script src="<?= base_url()?>/assets/js/pages-account-settings-account.js"></script>
-
-
-    <!-- Place this tag in your head or just before your close body tag. -->
-    <script async defer src="https://buttons.github.io/buttons.js"></script>
-  </body>
-</html>

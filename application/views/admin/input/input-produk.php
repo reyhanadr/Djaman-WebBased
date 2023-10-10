@@ -22,6 +22,7 @@
                               placeholder="PJM001"
                               value="<?php echo $newProductID; ?>"
                               readonly
+                              required
                             />
                           </div>
                           <div class="mb-3">
@@ -31,16 +32,18 @@
                                 class="form-control"
                                 id="nama_jamu"
                                 name="nama_jamu"
-                                placeholder="Beras Kencur"
+                                placeholder="Cth: Beras Kencur"
+                                required title="Formulir Tidak Boleh Kosong."
                               />
                           </div>
-                          <div>
+                          <div class="mb-2">
                               <label for="deskripsi" class="form-label">Deskripsi Jamu</label>
-                              <textarea class="form-control" id="deskripsi" name="deskripsi" rows="3"></textarea>
+                              <textarea class="form-control" id="deskripsi" name="deskripsi" rows="3" required placeholder="Deksripsi Detail Tentang Produk Jamu"></textarea>
+                              
                           </div>
                           <div class="mb-3">
                               <label for="kategori" class="form-label">Kategori Jamu</label>
-                              <select class="form-select" id="kategori" name="kategori" aria-label="Default select example">
+                              <select class="form-select" id="kategori" name="kategori" aria-label="Default select example" required>
                                   <option selected disabled>Pilih Kategori</option>
                                   <?php foreach ($kategori as $row) { ?>
                                       <option value="<?php echo $row['id_kategori']; ?>"><?php echo $row['nama_kategori']; ?></option>
@@ -48,13 +51,14 @@
                               </select>
                           </div>
                           <div class="mb-3">
-                              <label for="exampleFormControlInput1" class="form-label">Satuan (PCS atau Pack)</label>
+                              <label for="exampleFormControlInput1" class="form-label">Satuan (cth: PCS/Pack/botol/dll)</label>
                               <input
                                 type="text"
                                 class="form-control"
                                 id="satuan"
                                 name="satuan"
-                                placeholder="Pcs/Pack"
+                                placeholder="Cth: Pcs/Pack/Botol"
+                                required
                               />
                           </div>
                           <div class="mb-3">
@@ -64,7 +68,8 @@
                               class="form-control"
                               id="harga"
                               name="harga_varchar"
-                              placeholder="10000"
+                              placeholder="Cth: 10.000"
+                              required
                             />
                             <input
                               type="text"
@@ -80,7 +85,8 @@
                               class="form-control"
                               id="manfaat1"
                               name="manfaat1"
-                              placeholder="Manfaat 1"
+                              placeholder="Cth: Meningkatkan Daya Tahan Tubuh"
+                              required
                             />
                           </div>
                           <div class="mb-3">
@@ -90,7 +96,8 @@
                               class="form-control"
                               id="manfaat2"
                               name="manfaat2"
-                              placeholder="Manfaat 2"
+                              placeholder="Cth: Menjaga Kesehatan Organ Tubuh"
+                              required
                             />
                           </div>
                           <div class="mb-3">
@@ -100,22 +107,29 @@
                               class="form-control"
                               id="manfaat3"
                               name="manfaat3"
-                              placeholder="Manfaat 3"
+                              placeholder="Cth: Meningkatkan sistem pencernaan"
+                              required title="Silakan isi nama Anda."
                             />
                           </div>
+                          <div>
+                              <label for="deskripsi" class="form-label">Link Marketplace</label>
+                              <textarea class="form-control" id="deskripsi" name="link_marketplace" rows="3"  placeholder="Link Shopee/Tokopedia/Dll"></textarea>
+                          </div>
                           <hr class="m-0">
+
+                          
 
                           <!-- Foto -->
                           <div class="mt-4">
                             <div class="d-flex align-items-start align-items-sm-center gap-4">
                               <img style="max-width: 100%; height: auto; width: 200px;"
-                                src="<?= base_url()?>/assets/img/produk/default.jpg"
+                                src="<?= base_url()?>/assets/img/produk/default.webp"
                                 alt="foto-produk"
                                 class="d-block rounded "
-
                                 id="uploadedAvatar"
                               />
                               <div class="button-wrapper">
+
                                 <label for="upload" class="btn btn-primary me-2 mb-4" tabindex="0">
                                   <span class="d-none d-sm-block">Upload Foto Produk</span>
                                   <i class="bx bx-upload d-block d-sm-none"></i>
@@ -125,7 +139,7 @@
                                     class="account-file-input"
                                     hidden
                                     name="foto"
-                                    accept="image/png, image/jpeg"
+                                    accept="image/png, image/jpeg, image/webp"
                                   />
                                 </label>
                                 <button type="button" class="btn btn-outline-secondary account-image-reset mb-4">
@@ -133,7 +147,7 @@
                                   <span class="d-none d-sm-block">Reset</span>
                                 </button>
 
-                                <p class="text-muted mb-0">Allowed JPG, GIF or PNG. Max size of 2MB</p>
+                                <p class="text-muted mb-0">Format Gambar .jpg, .png, .webp dan ukuran Gambar Maksimal 5MB.</p>
                               </div>
                               
                             </div>
@@ -144,7 +158,7 @@
                     </div>
                     <div class="row">
                       <div class="mt-1">
-                        <button type="submit" class="btn btn-primary ">Tambah Produk</button>
+                        <button type="submit" class="btn btn-primary ">Simpan Produk</button>
                         <a href="<?= base_url()?>index.php/Produk/tampilDataProduk" class="btn btn-outline-primary">Kembali</a>
                       </div>
                     </div>
@@ -153,59 +167,6 @@
                 </div>
               </div>
             <!-- / Content -->
-
-            <!-- Footer -->
-            <footer class="content-footer footer bg-footer-theme">
-              <div class="container-xxl d-flex flex-wrap justify-content-between py-2 flex-md-row flex-column">
-                <div class="mb-2 mb-md-0">
-                  ©
-                  <script>
-                    document.write(new Date().getFullYear());
-                  </script>
-                  , made with ❤️ by
-                  <a href="https://reyhanadr.epizy.com" target="_blank" class="footer-link fw-bolder">Reyhanadr</a>
-                </div>
-
-              </div>
-            </footer>
-            <!-- / Footer -->
-
-            <div class="content-backdrop fade"></div>
-          </div>
-          <!-- Content wrapper -->
-        </div>
-        <!-- / Layout page -->
-      </div>
-
-      <!-- Overlay -->
-      <div class="layout-overlay layout-menu-toggle"></div>
-    </div>
-    <!-- / Layout wrapper -->
-
-
-    <!-- Core JS -->
-    <!-- build:js assets/vendor/js/core.js -->
-    <script src="<?= base_url()?>/assets/vendor/libs/jquery/jquery.js"></script>
-    <script src="<?= base_url()?>/assets/vendor/libs/popper/popper.js"></script>
-    <script src="<?= base_url()?>/assets/vendor/js/bootstrap.js"></script>
-    <script src="<?= base_url()?>/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
-
-    <script src="<?= base_url()?>/assets/vendor/js/menu.js"></script>
-    <!-- endbuild -->
-
-    <!-- Vendors JS -->
-    <script src="<?= base_url()?>/assets/vendor/libs/apex-charts/apexcharts.js"></script>
-
-    <!-- Main JS -->
-    <script src="<?= base_url()?>/assets/js/main.js"></script>
-
-    <!-- Page JS -->
-    <script src="<?= base_url()?>/assets/js/dashboards-analytics.js"></script>
-    <script src="<?= base_url()?>/assets/js/pages-account-settings-account.js"></script>
-
-
-    <!-- Place this tag in your head or just before your close body tag. -->
-    <script async defer src="https://buttons.github.io/buttons.js"></script>
     <script>
       $(document).ready(function() {
         $('#harga').on('input', function() {
@@ -224,5 +185,96 @@
         });
       });
     </script>
-  </body>
-</html>
+    <script>
+        $(document).ready(function() {
+            // Mengganti pesan validasi "required" untuk ID Produk
+            $("#id_produk").on("invalid", function(event) {
+                event.target.setCustomValidity("Silakan isi ID Produk.");
+            });
+
+            // Mengembalikan pesan validasi ke default jika input valid
+            $("#id_produk").on("input", function(event) {
+                event.target.setCustomValidity("");
+            });
+
+            // Mengganti pesan validasi "required" untuk Nama Jamu
+            $("#nama_jamu").on("invalid", function(event) {
+                event.target.setCustomValidity("Silakan isi Nama Jamu.");
+            });
+
+            // Mengembalikan pesan validasi ke default jika input valid
+            $("#nama_jamu").on("input", function(event) {
+                event.target.setCustomValidity("");
+            });
+
+            // Mengganti pesan validasi "required" untuk Deskripsi Jamu
+            $("#deskripsi").on("invalid", function(event) {
+                event.target.setCustomValidity("Silakan isi Deskripsi Jamu.");
+            });
+
+            // Mengembalikan pesan validasi ke default jika input valid
+            $("#deskripsi").on("input", function(event) {
+                event.target.setCustomValidity("");
+            });
+
+            // Mengganti pesan validasi "required" untuk Kategori Jamu
+            $("#kategori").on("invalid", function(event) {
+                event.target.setCustomValidity("Pilih Kategori Jamu.");
+            });
+
+            // Mengembalikan pesan validasi ke default jika input valid
+            $("#kategori").on("input", function(event) {
+                event.target.setCustomValidity("");
+            });
+
+            // Mengganti pesan validasi "required" untuk Satuan
+            $("#satuan").on("invalid", function(event) {
+                event.target.setCustomValidity("Silakan isi Satuan.");
+            });
+
+            // Mengembalikan pesan validasi ke default jika input valid
+            $("#satuan").on("input", function(event) {
+                event.target.setCustomValidity("");
+            });
+
+            // Mengganti pesan validasi "required" untuk Harga per Satuan
+            $("#harga").on("invalid", function(event) {
+                event.target.setCustomValidity("Silakan isi Harga per Satuan.");
+            });
+
+            // Mengembalikan pesan validasi ke default jika input valid
+            $("#harga").on("input", function(event) {
+                event.target.setCustomValidity("");
+            });
+
+            // Mengganti pesan validasi "required" untuk Manfaat 1
+            $("#manfaat1").on("invalid", function(event) {
+                event.target.setCustomValidity("Silakan isi Manfaat 1.");
+            });
+
+            // Mengembalikan pesan validasi ke default jika input valid
+            $("#manfaat1").on("input", function(event) {
+                event.target.setCustomValidity("");
+            });
+
+            // Mengganti pesan validasi "required" untuk Manfaat 2
+            $("#manfaat2").on("invalid", function(event) {
+                event.target.setCustomValidity("Silakan isi Manfaat 2.");
+            });
+
+            // Mengembalikan pesan validasi ke default jika input valid
+            $("#manfaat2").on("input", function(event) {
+                event.target.setCustomValidity("");
+            });
+
+            // Mengganti pesan validasi "required" untuk Manfaat 3
+            $("#manfaat3").on("invalid", function(event) {
+                event.target.setCustomValidity("Silakan isi Manfaat 3.");
+            });
+
+            // Mengembalikan pesan validasi ke default jika input valid
+            $("#manfaat3").on("input", function(event) {
+                event.target.setCustomValidity("");
+            });
+        });
+    </script>

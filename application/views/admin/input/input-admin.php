@@ -31,6 +31,7 @@
                                 class="form-control"
                                 id="nama"
                                 name="nama"
+                                required
                               />
                           </div>
                           <div class="mb-3">
@@ -40,6 +41,7 @@
                                 class="form-control"
                                 id="email"
                                 name="email"
+                                required
                               />
                           </div>
                           <div class="mb-3">
@@ -49,6 +51,7 @@
                               class="form-control"
                               id="username"
                               name="username"
+                              required
                             />
                           </div>
                           <div class="mb-3">
@@ -58,6 +61,7 @@
                               class="form-control"
                               id="password"
                               name="password"
+                              required
                             />
                           </div>
                           <div class="mb-3">
@@ -88,7 +92,6 @@
                                 src="<?= base_url()?>/assets/img/avatars/1.png"
                                 alt="user-avatar"
                                 class="d-block rounded "
-
                                 id="uploadedAvatar"
                               />
                               <div class="button-wrapper">
@@ -109,7 +112,7 @@
                                   <span class="d-none d-sm-block">Reset</span>
                                 </button>
 
-                                <p class="text-muted mb-0">Allowed JPG, GIF or PNG. Max size of 2MB</p>
+                                <p class="text-muted mb-0">Format Gambar .jpg, .png, .webp dan ukuran Gambar Maksimal 5MB.</p>
                               </div>
                               
                             </div>
@@ -120,7 +123,7 @@
                     </div>
                     <div class="row">
                             <div class="col-12 col-md-8 col-lg-4 order-3 order-md-2 mb-4 ">
-                                <button type="submit" class="btn btn-primary ">Tambah Data</button>
+                                <button type="submit" class="btn btn-primary ">Simpan Admin</button>
                             </div>
                     </div>
                     </form>
@@ -128,59 +131,7 @@
                 </div>
               </div>
             <!-- / Content -->
-
-            <!-- Footer -->
-            <footer class="content-footer footer bg-footer-theme">
-              <div class="container-xxl d-flex flex-wrap justify-content-between py-2 flex-md-row flex-column">
-                <div class="mb-2 mb-md-0">
-                  ©
-                  <script>
-                    document.write(new Date().getFullYear());
-                  </script>
-                  , made with ❤️ by
-                  <a href="https://reyhanadr.epizy.com" target="_blank" class="footer-link fw-bolder">Reyhanadr</a>
-                </div>
-
-              </div>
-            </footer>
-            <!-- / Footer -->
-
-            <div class="content-backdrop fade"></div>
-          </div>
-          <!-- Content wrapper -->
-        </div>
-        <!-- / Layout page -->
-      </div>
-
-      <!-- Overlay -->
-      <div class="layout-overlay layout-menu-toggle"></div>
-    </div>
-    <!-- / Layout wrapper -->
-
-
-    <!-- Core JS -->
-    <!-- build:js assets/vendor/js/core.js -->
-    <script src="<?= base_url()?>/assets/vendor/libs/jquery/jquery.js"></script>
-    <script src="<?= base_url()?>/assets/vendor/libs/popper/popper.js"></script>
-    <script src="<?= base_url()?>/assets/vendor/js/bootstrap.js"></script>
-    <script src="<?= base_url()?>/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
-
-    <script src="<?= base_url()?>/assets/vendor/js/menu.js"></script>
-    <!-- endbuild -->
-
-    <!-- Vendors JS -->
-    <script src="<?= base_url()?>/assets/vendor/libs/apex-charts/apexcharts.js"></script>
-
-    <!-- Main JS -->
-    <script src="<?= base_url()?>/assets/js/main.js"></script>
-
-    <!-- Page JS -->
-    <script src="<?= base_url()?>/assets/js/dashboards-analytics.js"></script>
-    <script src="<?= base_url()?>/assets/js/pages-account-settings-account.js"></script>
-
-
-    <!-- Place this tag in your head or just before your close body tag. -->
-    <script async defer src="https://buttons.github.io/buttons.js"></script>
+            
     <script>
       $(document).ready(function() {
         $('#harga').on('input', function() {
@@ -197,7 +148,55 @@
           // Set nilai input tersembunyi (hidden input) dengan harga integer
           $('#hidden_harga').val(hargaInt);
         });
+        // Mengganti pesan validasi "required" untuk ID Admin
+        $("#id_admin").on("invalid", function(event) {
+            event.target.setCustomValidity("Silakan isi ID Admin.");
+        });
+
+        // Mengembalikan pesan validasi ke default jika input valid
+        $("#id_admin").on("input", function(event) {
+            event.target.setCustomValidity("");
+        });
+
+        // Mengganti pesan validasi "required" untuk Nama Admin
+        $("#nama").on("invalid", function(event) {
+            event.target.setCustomValidity("Silakan isi Nama Admin.");
+        });
+
+        // Mengembalikan pesan validasi ke default jika input valid
+        $("#nama").on("input", function(event) {
+            event.target.setCustomValidity("");
+        });
+
+        // Mengganti pesan validasi "required" untuk Email Admin
+        $("#email").on("invalid", function(event) {
+            event.target.setCustomValidity("Silakan isi Email Admin.");
+        });
+
+        // Mengembalikan pesan validasi ke default jika input valid
+        $("#email").on("input", function(event) {
+            event.target.setCustomValidity("");
+        });
+
+        // Mengganti pesan validasi "required" untuk Username Admin
+        $("#username").on("invalid", function(event) {
+            event.target.setCustomValidity("Silakan isi Username Admin.");
+        });
+
+        // Mengembalikan pesan validasi ke default jika input valid
+        $("#username").on("input", function(event) {
+            event.target.setCustomValidity("");
+        });
+
+        // Mengganti pesan validasi "required" untuk Password Admin
+        $("#password").on("invalid", function(event) {
+            event.target.setCustomValidity("Silakan isi Password Admin.");
+        });
+
+        // Mengembalikan pesan validasi ke default jika input valid
+        $("#password").on("input", function(event) {
+            event.target.setCustomValidity("");
+        });
       });
     </script>
-  </body>
-</html>
+
